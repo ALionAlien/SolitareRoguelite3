@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://coeeut3xfeufn"]
+
+[ext_resource type="Script" uid="uid://dmbbflac61270" path="res://Scenes/UI/EnemyStacks/enemy_zone.gd" id="1_jn14p"]
+[ext_resource type="Shape2D" uid="uid://dye4j1iq8fian" path="res://Resources/CardShape.tres" id="2_mnf0y"]
+[ext_resource type="Script" uid="uid://dlpqdoypijbuo" path="res://Classes/background_class.gd" id="3_852h7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnf0y"]
+bg_color = Color(0.180005, 0.180005, 0.180005, 1)
+
+[node name="EnemyZone" type="Area2D"]
+script = ExtResource("1_jn14p")
+metadata/_custom_type_script = "uid://dmbbflac61270"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_mnf0y")
+
+[node name="CardBackground" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -105.0
+offset_right = 75.0
+offset_bottom = 105.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mnf0y")
+script = ExtResource("3_852h7")
+shape = ExtResource("2_mnf0y")
+metadata/_custom_type_script = "uid://dlpqdoypijbuo"
+
+[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

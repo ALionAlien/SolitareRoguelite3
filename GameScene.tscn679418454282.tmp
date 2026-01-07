@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2qk0br0iubas"]
+
+[ext_resource type="Script" uid="uid://wmhilo8ylxr4" path="res://game_scene.gd" id="1_eqhe0"]
+[ext_resource type="PackedScene" uid="uid://dc27ppsjs4hd5" path="res://Card/CardScene.tscn" id="2_k77ap"]
+[ext_resource type="Script" uid="uid://c6x4m0si05rth" path="res://Classes/mouse_manager.gd" id="3_haeiw"]
+[ext_resource type="Script" uid="uid://dox3uvwlby1rb" path="res://Classes/droppable_zone_class.gd" id="4_b5kf5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hvuor"]
+size = Vector2(134, 168)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_eqhe0")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 824.0
+offset_top = 168.0
+offset_right = 994.0
+offset_bottom = 260.0
+text = "Create a card"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="MouseManager" type="Node2D" parent="."]
+script = ExtResource("3_haeiw")
+metadata/_custom_type_script = "uid://c6x4m0si05rth"
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(93.37, 90.365)
+
+[node name="CardScene" parent="Node2D" instance=ExtResource("2_k77ap")]
+position = Vector2(-523, -296)
+
+[node name="CardScene2" parent="Node2D/CardScene" instance=ExtResource("2_k77ap")]
+position = Vector2(76, 91)
+
+[node name="CardScene3" parent="Node2D/CardScene/CardScene2" instance=ExtResource("2_k77ap")]
+position = Vector2(399, -75)
+
+[node name="CardScene4" parent="Node2D/CardScene/CardScene2/CardScene3" instance=ExtResource("2_k77ap")]
+position = Vector2(-459, 109)
+
+[node name="CardScene5" parent="Node2D/CardScene/CardScene2/CardScene3/CardScene4" instance=ExtResource("2_k77ap")]
+position = Vector2(68, 70)
+
+[node name="CardScene6" parent="Node2D/CardScene/CardScene2/CardScene3/CardScene4/CardScene5" instance=ExtResource("2_k77ap")]
+position = Vector2(317, -118)
+
+[node name="CardScene7" parent="Node2D/CardScene/CardScene2/CardScene3/CardScene4/CardScene5/CardScene6" instance=ExtResource("2_k77ap")]
+position = Vector2(40, 82)
+
+[node name="CardScene8" parent="Node2D/CardScene/CardScene2/CardScene3/CardScene4/CardScene5/CardScene6/CardScene7" instance=ExtResource("2_k77ap")]
+position = Vector2(-87, 36)
+
+[node name="CardScene9" parent="Node2D/CardScene/CardScene2/CardScene3/CardScene4/CardScene5/CardScene6/CardScene7/CardScene8" instance=ExtResource("2_k77ap")]
+position = Vector2(-53, -142)
+
+[node name="CardScene10" parent="Node2D/CardScene/CardScene2/CardScene3/CardScene4/CardScene5/CardScene6/CardScene7/CardScene8/CardScene9" instance=ExtResource("2_k77ap")]
+position = Vector2(222, 243)
+
+[node name="Droppable" type="Area2D" parent="."]
+script = ExtResource("4_b5kf5")
+metadata/_custom_type_script = "uid://dox3uvwlby1rb"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Droppable"]
+position = Vector2(416, 253)
+shape = SubResource("RectangleShape2D_hvuor")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

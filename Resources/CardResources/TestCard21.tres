@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://jp62qf7nh2tk"]
+
+[ext_resource type="Script" uid="uid://bow68rggu8hms" path="res://Resources/card_data.gd" id="1_26fwq"]
+
+[resource]
+script = ExtResource("1_26fwq")
+blue = false
+red = false
+orange = false
+green = false
+purple = false
+white = true
+black = true
+damage = 1
+damage_buff = 0
+metadata/_custom_type_script = "uid://bow68rggu8hms"

@@ -1,0 +1,141 @@
+[gd_scene load_steps=10 format=3 uid="uid://d2qk0br0iubas"]
+
+[ext_resource type="Script" uid="uid://wmhilo8ylxr4" path="res://Scenes/game_scene.gd" id="1_eqhe0"]
+[ext_resource type="Texture2D" uid="uid://ctwkagj50e4l0" path="res://Assets/Textures/eqn-dungeon.jpg" id="2_kilg5"]
+[ext_resource type="PackedScene" uid="uid://b4dbacbjqg3r4" path="res://Scenes/UI/FriendlyStacks/FriendlyStackLineup.tscn" id="2_lohlh"]
+[ext_resource type="Script" uid="uid://c6x4m0si05rth" path="res://Classes/mouse_manager.gd" id="3_haeiw"]
+[ext_resource type="PackedScene" uid="uid://whns0bt3ryx4" path="res://Scenes/UI/FriendlyStacks/friendly_zone_holder.tscn" id="3_x6js8"]
+[ext_resource type="PackedScene" uid="uid://da6g15p6d5p4t" path="res://Scenes/UI/EnemyStacks/enemy_lineup.tscn" id="4_kilg5"]
+[ext_resource type="PackedScene" uid="uid://cdgn868iv46gr" path="res://Scenes/UI/EnemyStacks/EnemyZoneHolder.tscn" id="5_x6js8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x6js8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kilg5"]
+bg_color = Color(0.258824, 0.305882, 0.258824, 1)
+
+[node name="GameScene" type="Node2D"]
+script = ExtResource("1_eqhe0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 27.32)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel2"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
+custom_minimum_size = Vector2(50.23, 145.645)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel"]
+custom_minimum_size = Vector2(0, 463.475)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x6js8")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 40
+
+[node name="FriendlyStackLineup" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer" instance=ExtResource("2_lohlh")]
+layout_mode = 2
+theme_override_constants/separation = 180
+default_seperation = 180.0
+
+[node name="ZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyStackLineup" instance=ExtResource("3_x6js8")]
+layout_mode = 2
+
+[node name="ZoneHolder3" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyStackLineup" instance=ExtResource("3_x6js8")]
+layout_mode = 2
+
+[node name="ZoneHolder4" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyStackLineup" instance=ExtResource("3_x6js8")]
+layout_mode = 2
+
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kilg5")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 40
+
+[node name="EnemyLineup" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer" instance=ExtResource("4_kilg5")]
+layout_mode = 2
+
+[node name="EnemyZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyLineup" instance=ExtResource("5_x6js8")]
+layout_mode = 2
+
+[node name="EnemyZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyLineup" instance=ExtResource("5_x6js8")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="AddStack" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Add Card Stack"
+
+[node name="AddCard" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Add a Card"
+
+[node name="AddEnemyStack" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Add Enemy Stack"
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Flip Bottom Row"
+
+[node name="CardManager" type="Node2D" parent="."]
+position = Vector2(-609028, 0)
+script = ExtResource("3_haeiw")
+metadata/_custom_type_script = "uid://c6x4m0si05rth"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-335.409, -189)
+scale = Vector2(1.38592, 1.38592)
+texture = ExtResource("2_kilg5")
+centered = false
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyStackLineup" method="_on_add_stack_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddCard" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyStackLineup" method="_on_add_card_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddEnemyStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyLineup" method="_on_add_enemy_stack_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/Button" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyStackLineup" method="_on_button_pressed"]

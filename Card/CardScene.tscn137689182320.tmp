@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc27ppsjs4hd5"]
+
+[ext_resource type="Script" uid="uid://bdu1jgfk5rbry" path="res://Card/card_scene.gd" id="1_833ip"]
+[ext_resource type="Texture2D" uid="uid://41ik1p16eob2" path="res://icon.svg" id="1_wjess"]
+[ext_resource type="Script" uid="uid://dox3uvwlby1rb" path="res://Classes/droppable_zone_class.gd" id="3_833ip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnrib"]
+size = Vector2(83, 132)
+
+[node name="CardScene" type="Area2D"]
+script = ExtResource("1_833ip")
+metadata/_custom_type_script = "uid://dtu16lqa6gjxi"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.675, 1.013)
+texture = ExtResource("1_wjess")
+
+[node name="DroppableCardArea" type="Area2D" parent="."]
+script = ExtResource("3_833ip")
+metadata/_custom_type_script = "uid://dox3uvwlby1rb"
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DroppableCardArea"]
+shape = SubResource("RectangleShape2D_rnrib")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_rnrib")
+
+[node name="RankLabel" type="Label" parent="."]
+offset_left = -36.21
+offset_top = -60.585
+offset_right = 30.575
+offset_bottom = -37.585
+theme_override_font_sizes/font_size = 10
+text = "zdbsv"

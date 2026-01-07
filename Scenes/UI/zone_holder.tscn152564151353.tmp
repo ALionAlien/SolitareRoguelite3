@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://whns0bt3ryx4"]
+
+[ext_resource type="Script" uid="uid://cuagq8jxtnsat" path="res://Scenes/UI/zone_holder.gd" id="1_qqobn"]
+[ext_resource type="PackedScene" uid="uid://dm56iekr2l361" path="res://Scenes/UI/stack_zone.tscn" id="1_t5bix"]
+
+[node name="ZoneHolder" type="Control" node_paths=PackedStringArray("zone")]
+layout_mode = 3
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 1
+script = ExtResource("1_qqobn")
+zone = NodePath("StackZone")
+default_card_gap = 20.0
+metadata/_custom_type_script = "uid://cuagq8jxtnsat"
+
+[node name="StackZone" parent="." instance=ExtResource("1_t5bix")]
+position = Vector2(0, 150)
+
+[connection signal="resized" from="." to="." method="_on_resized"]
+[connection signal="stack_changed" from="StackZone" to="." method="_on_stack_zone_stack_changed"]

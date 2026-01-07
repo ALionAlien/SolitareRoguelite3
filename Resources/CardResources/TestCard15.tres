@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://dejrcwnrcg411"]
+
+[ext_resource type="Script" uid="uid://bow68rggu8hms" path="res://Resources/card_data.gd" id="1_tocpp"]
+
+[resource]
+script = ExtResource("1_tocpp")
+blue = false
+red = false
+orange = true
+green = false
+purple = false
+white = false
+black = true
+damage = 1
+damage_buff = 0
+metadata/_custom_type_script = "uid://bow68rggu8hms"

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc27ppsjs4hd5"]
+
+[ext_resource type="Script" uid="uid://dq7vkrqrd8vmr" path="res://Card/card_script.gd" id="1_rnrib"]
+[ext_resource type="Texture2D" uid="uid://41ik1p16eob2" path="res://icon.svg" id="1_wjess"]
+[ext_resource type="Script" uid="uid://byvf5sthyp5oc" path="res://Classes/card_collider_class.gd" id="3_833ip"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnrib"]
+size = Vector2(127, 191)
+
+[node name="CardScene" type="Node2D"]
+script = ExtResource("1_rnrib")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1, 1.5)
+texture = ExtResource("1_wjess")
+
+[node name="CardHitbox" type="Area2D" parent="."]
+script = ExtResource("3_833ip")
+metadata/_custom_type_script = "uid://byvf5sthyp5oc"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CardHitbox"]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_rnrib")
+
+[connection signal="dragging_entered" from="CardHitbox" to="." method="_on_card_hitbox_dragging_entered"]
+[connection signal="dragging_exited" from="CardHitbox" to="." method="_on_card_hitbox_dragging_exited"]
+[connection signal="hover_entered" from="CardHitbox" to="." method="_on_card_hitbox_hover_entered"]
+[connection signal="hover_exited" from="CardHitbox" to="." method="_on_card_hitbox_hover_exited"]
