@@ -6,3 +6,4 @@ extends Control
 	set(value):
 		custom_minimum_size.x = width
 		width = value 
+		#afhhLSAEJFB
