@@ -1,3 +1,4 @@
+@tool
 class_name StackZone
 extends Droppable
 
