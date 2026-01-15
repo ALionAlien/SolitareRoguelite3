@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://2oy0e67tb06n"]
+
+[ext_resource type="Script" uid="uid://cuagq8jxtnsat" path="res://Scenes/UI/manager_x_class.gd" id="1_k6j32"]
+[ext_resource type="Script" uid="uid://d2tlkbwyglkn7" path="res://Scenes/UI/manager_y_class.gd" id="2_m7wy5"]
+[ext_resource type="PackedScene" uid="uid://dm56iekr2l361" path="res://Scenes/UI/StackZone/stack_zone.tscn" id="2_sm05g"]
+
+[node name="EnemyZoneHolder" type="Control" node_paths=PackedStringArray("zone", "manager_y")]
+custom_minimum_size = Vector2(147.465, 0)
+layout_mode = 3
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -73.7325
+offset_right = 73.7325
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_k6j32")
+zone = NodePath("VBoxContainer/YManager/StackZone")
+manager_y = NodePath("VBoxContainer/YManager")
+metadata/_custom_type_script = "uid://cuagq8jxtnsat"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 239.32)
+layout_mode = 2
+
+[node name="YManager" type="Control" parent="VBoxContainer" node_paths=PackedStringArray("zone")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+script = ExtResource("2_m7wy5")
+zone = NodePath("StackZone")
+metadata/_custom_type_script = "uid://d2tlkbwyglkn7"
+
+[node name="StackZone" parent="VBoxContainer/YManager" node_paths=PackedStringArray("ManagerX", "ManagerY") instance=ExtResource("2_sm05g")]
+ManagerX = NodePath("../../..")
+ManagerY = NodePath("..")

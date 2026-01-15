@@ -105,7 +105,7 @@ func drag_entered():
 		click_check = 1.0
 		z_index = 1
 		is_dragging = true
-		get_stack_zone().emit_signal("stack_changed")
+		get_manager_y().set_gap()
 		update_data()
 	if get_parent() is Card and get_parent().flipped_up:
 		get_parent().check_stack_upwards()
@@ -116,7 +116,7 @@ func drag_exited():
 	super.drag_exited()
 	check_stack_upwards()
 	set_children_z_index(0)
-	get_stack_zone().emit_signal("stack_changed")
+	get_manager_y().set_gap()
 
 
 func flip_down():
@@ -164,7 +164,7 @@ func is_legal_drop(target_card : Card)->bool:
 func change_parent(new_parent : Node)->void:
 	#call old parent's methods
 	var old_parent = get_parent()
-	var old_stack_zone : StackZone = get_stack_zone()
+	var old_stack_zone : StackManagerY = get_manager_y()
 	if old_parent is Card:
 		if !old_parent.flipped_up:
 			old_parent.flip_up()
@@ -173,27 +173,20 @@ func change_parent(new_parent : Node)->void:
 	self.reparent(new_parent)
 	global_scale = new_parent.global_scale
 	current_card_stack = get_stack_zone()
-	update_last_moved_stack.emit(get_stack_zone())
 	#call new parent's methods
 	if new_parent is Card:
 		pass
 	if old_stack_zone:
 		old_stack_zone.card_exited()
-	if get_stack_zone():
-		get_stack_zone().card_entered()
+	if get_manager_y():
+		get_manager_y().card_entered()
 	
 	update_position()
 	get_bottom_card().check_stack_upwards()
 
 func update_position()->void:
-	if self.get_parent() is Card:
-		var zone_holder : ZoneHolder = null
-		if get_stack_zone().get_parent() is ZoneHolder:
-			zone_holder = get_stack_zone().get_parent()
-		if zone_holder:
-			return_position = Vector2(0,zone_holder.recalculated_card_gap)
-		else:
-			return_position = Vector2(0,20)
+	if get_parent() is Card and get_manager_y():
+		return_position = Vector2(0,get_manager_y().recalculated_card_gap)
 	else:
 		return_position = Vector2.ZERO
 
@@ -238,7 +231,17 @@ func get_stack_zone()->StackZone:
 		return get_parent().get_stack_zone()
 	elif get_parent() is StackZone:
 		return get_parent()
-	return null
+	else:
+		return null
+
+
+func get_manager_y()->StackManagerY:
+	if get_parent() is Card:
+		return get_parent().get_manager_y()
+	elif get_parent() is StackZone:
+		return get_parent().get_parent()
+	else:
+		return null
 
 func set_children_z_index(index : int)->void:
 	if "visual" in self:

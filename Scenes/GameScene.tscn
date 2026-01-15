@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2qk0br0iubas"]
+[gd_scene load_steps=10 format=3 uid="uid://d2qk0br0iubas"]
 
 [ext_resource type="Script" uid="uid://wmhilo8ylxr4" path="res://Scenes/game_scene.gd" id="1_eqhe0"]
 [ext_resource type="Texture2D" uid="uid://ctwkagj50e4l0" path="res://Assets/Textures/eqn-dungeon.jpg" id="2_kilg5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://qormu2i0j68u" path="res://Scenes/UI/ZoneLinup/Friendly_lineup.gd" id="2_x6js8"]
 [ext_resource type="Script" uid="uid://c6x4m0si05rth" path="res://Classes/mouse_manager.gd" id="3_haeiw"]
 [ext_resource type="PackedScene" uid="uid://whns0bt3ryx4" path="res://Scenes/UI/FriendlyZone/friendly_zone_holder.tscn" id="3_x6js8"]
+[ext_resource type="PackedScene" uid="uid://2oy0e67tb06n" path="res://Scenes/UI/EnemyStacks/enemy_zone_holder.tscn" id="5_x6js8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x6js8"]
 
@@ -59,32 +60,21 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_x6js8")
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2"]
 custom_minimum_size = Vector2(0.48, 0)
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
 
 [node name="ZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer"]
 layout_mode = 2
 script = ExtResource("2_x6js8")
-seperation = 25.02
+seperation = 24.5
 metadata/_custom_type_script = "uid://ry5fw2vcrle3"
 
 [node name="ZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(131.145, 0)
 layout_mode = 2
 
 [node name="ZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(131.145, 0)
-layout_mode = 2
-
-[node name="ZoneHolder3" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(265.977, 0)
-layout_mode = 2
-default_width = 304.39
-
-[node name="ZoneHolder4" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(131.145, 0)
 layout_mode = 2
 
 [node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer"]
@@ -106,28 +96,25 @@ script = ExtResource("2_lohlh")
 seperation = 14.22
 metadata/_custom_type_script = "uid://ry5fw2vcrle3"
 
-[node name="ZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(112.146, 0)
+[node name="EnemyZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+custom_minimum_size = Vector2(116.384, 0)
 layout_mode = 2
 
-[node name="ZoneHolder6" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(112.146, 0)
+[node name="EnemyZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+custom_minimum_size = Vector2(216.331, 0)
+layout_mode = 2
+default_width = 278.815
+
+[node name="EnemyZoneHolder3" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+custom_minimum_size = Vector2(116.384, 0)
 layout_mode = 2
 
-[node name="ZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(112.146, 0)
+[node name="EnemyZoneHolder4" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+custom_minimum_size = Vector2(116.384, 0)
 layout_mode = 2
 
-[node name="ZoneHolder3" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(112.146, 0)
-layout_mode = 2
-
-[node name="ZoneHolder4" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(112.146, 0)
-layout_mode = 2
-
-[node name="ZoneHolder5" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
-custom_minimum_size = Vector2(112.146, 0)
+[node name="EnemyZoneHolder5" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+custom_minimum_size = Vector2(116.384, 0)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
@@ -152,7 +139,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Add Enemy Stack"
 
-[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
+[node name="FlipBottomRow" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Flip Bottom Row"
 
@@ -168,5 +155,6 @@ texture = ExtResource("2_kilg5")
 centered = false
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_add_stack_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddCard" to="." method="_on_add_card_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddCard" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_add_card_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddEnemyStack" to="." method="_on_add_enemy_stack_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/FlipBottomRow" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_flip_bottom_row_pressed"]

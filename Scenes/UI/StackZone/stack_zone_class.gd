@@ -3,6 +3,8 @@ class_name StackZone
 extends Droppable
 
 signal stack_changed
+@export var ManagerX : StackManagerX = null
+@export var ManagerY : StackManagerY
 
 var is_empty : bool = true :
 	set(variable):
