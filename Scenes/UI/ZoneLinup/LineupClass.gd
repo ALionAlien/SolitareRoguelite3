@@ -21,11 +21,6 @@ var children_count : int
 		recalculate_seperation()
 
 func _process(_delta)->void:
-	if Engine.is_editor_hint():
-		if children_count != get_children().size():
-			children_count = get_children().size()
-			recalculate_seperation()
-	else:
 		recalculate_seperation()
 
 func recalculate_seperation()->void:
@@ -97,12 +92,12 @@ func quick_mover(card : Card)->void:
 				last_moved_to_stack = stack.zone
 				return
 
-func add_random_card(_card : Resource)->void:
+func add_random_card()->void:
 	if stacks:
 		var new_card = card_scene.instantiate()
 		new_card.connect("quick_move",quick_mover)
 		new_card.connect("update_last_moved_stack",set_last_moved_stack)
-		new_card.card_data = random_card_data()
+		new_card.mana_cost = randi_range(0,4)
 		var random_zone_holder = stacks[randi() % stacks.size()]
 		if random_zone_holder.zone.get_bottom_card():
 			add_child(new_card)
@@ -116,12 +111,12 @@ func add_random_card(_card : Resource)->void:
 	await get_tree().process_frame
 	update_stacks()
 
-func random_card_data()->CardData:
-	#set back to 1 - 21
-	var random_numer : int = randi_range(1,1)
-	var path : String = resource_path + str(random_numer) + resource_extention
-	var card_data : CardData = load(path)
-	return card_data
+#func random_card_data()->CardData:
+	##set back to 1 - 21
+	#var random_numer : int = randi_range(1,21)
+	#var path : String = resource_path + str(random_numer) + resource_extention
+	#var card_data : CardData = load(path)
+	#return card_data
 
 func set_last_moved_stack(stack : StackZone)->void:
 	last_moved_to_stack = stack

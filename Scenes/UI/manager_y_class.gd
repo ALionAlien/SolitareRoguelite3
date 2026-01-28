@@ -7,11 +7,18 @@ extends Control
 @export var default_card_gap : float = 35
 var recalculated_card_gap : float
 
-func card_entered()->void:
+func _process(_delta)->void:
+	if Engine.is_editor_hint():
+		set_gap()
 	set_gap()
 
+func card_entered()->void:
+	#set_gap()
+	pass
+
 func card_exited()->void:
-	set_gap()
+	#set_gap()
+	pass
 
 func set_gap()->void:
 	var cards : Array[Card] = zone.get_all_cards_not_dragging()
@@ -29,10 +36,10 @@ func set_gap()->void:
 			var overflow_percentage : float = height/ total_stack_height
 			temp_card_gap = default_card_gap * overflow_percentage
 	
-	if recalculated_card_gap != temp_card_gap:
-		recalculated_card_gap = temp_card_gap
-		for card in cards:
-			card.update_position()
+	#if recalculated_card_gap != temp_card_gap:
+	recalculated_card_gap = temp_card_gap
+	for card in cards:
+		card.update_position()
 
 func get_rect2_from_collision(collision_shape_2d: CollisionShape2D) -> Rect2:
 	var shape = collision_shape_2d.shape

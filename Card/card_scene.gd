@@ -7,7 +7,7 @@ func _ready():
 
 func update_data()->void:
 	var background : TextureRect = visual.background
-	visual.card_label.text = str(colors_array)
+	visual.card_label.text = str(mana_cost, " - ", total_stack_mana)
 	if drop_lock:
 		background.modulate =  Color(0.5, 0.5, 0.5, 1) #grayed out
 	#elif is_dragging:
@@ -46,13 +46,13 @@ func clicked()->void:
 
 func flip_up():
 	flipped_up = true
-	get_bottom_card().check_stack_upwards()
+	super.flip_up()
 	var tween = create_tween()
 	tween.tween_property(visual, "rotation_y", 0, 0.6) \
 	.set_trans(Tween.TRANS_SINE)
-	
 
 func flip_down():
+	super.flip_down()
 	flipped_up = false
 	var tween = create_tween()
 	tween.tween_property(visual, "rotation_y", 180, 0.6) \

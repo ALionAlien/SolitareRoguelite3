@@ -4,13 +4,4 @@
 
 [resource]
 script = ExtResource("1_lyw3b")
-blue = false
-red = false
-orange = false
-green = false
-purple = true
-white = false
-black = true
-damage = 1
-damage_buff = 0
 metadata/_custom_type_script = "uid://bow68rggu8hms"

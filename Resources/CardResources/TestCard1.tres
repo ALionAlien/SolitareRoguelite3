@@ -11,6 +11,7 @@ green = false
 purple = false
 white = false
 black = false
+mana_cost = 0
 damage = 1
 damage_buff = 0
 metadata/_custom_type_script = "uid://bow68rggu8hms"

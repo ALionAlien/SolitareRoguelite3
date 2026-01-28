@@ -93,28 +93,18 @@ theme_override_constants/margin_bottom = 40
 [node name="ZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer"]
 layout_mode = 2
 script = ExtResource("2_lohlh")
-seperation = 14.22
+seperation = 21.35
 metadata/_custom_type_script = "uid://ry5fw2vcrle3"
 
+[node name="EnemyZoneHolder6" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+custom_minimum_size = Vector2(276.6, 0)
+layout_mode = 2
+default_width = 276.6
+
 [node name="EnemyZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
-custom_minimum_size = Vector2(116.384, 0)
-layout_mode = 2
-
-[node name="EnemyZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
-custom_minimum_size = Vector2(216.331, 0)
-layout_mode = 2
-default_width = 278.815
-
-[node name="EnemyZoneHolder3" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
-custom_minimum_size = Vector2(116.384, 0)
-layout_mode = 2
-
-[node name="EnemyZoneHolder4" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
-custom_minimum_size = Vector2(116.384, 0)
 layout_mode = 2
 
 [node name="EnemyZoneHolder5" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
-custom_minimum_size = Vector2(116.384, 0)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]

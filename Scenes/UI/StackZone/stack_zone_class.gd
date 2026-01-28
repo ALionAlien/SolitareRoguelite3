@@ -25,6 +25,12 @@ func get_all_cards_in_stack()->Array[Card]:
 		if child is Card:
 			cards_below = child.get_all_cards_below(cards_below)
 	return cards_below
+#
+#func get_bottom_card()->Card:
+	#for child in get_children():
+		#if child is Card:
+			#return child.get_bottom_card()
+	#return null
 
 func get_all_cards_not_dragging()->Array[Card]:
 	var cards_below : Array[Card]

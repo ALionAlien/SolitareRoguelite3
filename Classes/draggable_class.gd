@@ -78,6 +78,7 @@ func hover_check()->void:
 				var current_rect : Rect2 = get_rect2_from_collision(node.shape_owner_get_owner(0))
 				var overlap = get_overlap_area(self_rect, current_rect)
 				areas_sorted.append({"node":node,"overlap":overlap, "width":(current_rect.get_area()*node.global_scale).x})
+	
 	#sort by area
 	if areas_sorted.size() > 0:
 		#store largest area
