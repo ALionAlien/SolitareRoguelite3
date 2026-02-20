@@ -1,4 +1,4 @@
-class_name CardManager
+class_name MouseManager
 extends Node2D
 
 var is_dragging = false

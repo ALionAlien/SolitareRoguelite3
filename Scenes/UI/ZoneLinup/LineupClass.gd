@@ -2,12 +2,11 @@
 class_name ZoneLineup
 extends Container
 
-var zone_holder_scene : PackedScene = preload("res://Scenes/UI/FriendlyZone/friendly_zone_holder.tscn")
 
 var card_scene : PackedScene = preload("res://Card/CardScene.tscn")
+var card2_scene : PackedScene = preload("res://Card/card_1_scene.tscn")
 var resource_path : String = "res://Resources/CardResources/TestCard"
 var resource_extention : String = ".tres"
-
 
 var enemy_holders : Array[StackManagerX] = []
 var stacks : Array[StackManagerX] = []
@@ -19,6 +18,9 @@ var children_count : int
 	set(value):
 		seperation = max(0,value)
 		recalculate_seperation()
+
+func _ready():
+	update_stacks()
 
 func _process(_delta)->void:
 		recalculate_seperation()
@@ -46,7 +48,6 @@ func recalculate_seperation()->void:
 	for i in children.size():
 		if children[i] is StackManagerX:
 			children[i].set_zone_scale(new_scale)
-	
 
 	for i in children.size():
 		if children[i] is StackManagerX:
@@ -56,8 +57,8 @@ func recalculate_seperation()->void:
 			#if i < children.size():
 			new_x_pos += seperation * new_scale
 
-func add_stack()->void:
-	var new_stack_holder := zone_holder_scene.instantiate()
+func add_zone(scene : PackedScene)->void:
+	var new_stack_holder := scene.instantiate()
 	add_child(new_stack_holder)
 	new_stack_holder.set_owner(get_tree().edited_scene_root)
 	update_stacks()
@@ -68,6 +69,7 @@ func update_stacks()->void:
 		if child is StackManagerX:
 			temp_stacks.append(child)
 	stacks = temp_stacks
+	print(stacks)
 
 func quick_mover(card : Card)->void:
 	if last_moved_to_stack and last_moved_to_stack != card.get_stack_zone():
@@ -87,14 +89,18 @@ func quick_mover(card : Card)->void:
 					card.change_parent(bottom_card)
 					last_moved_to_stack = stack.zone
 					return
-			elif stack.zone.is_empty:
+			elif !stack.zone.has_cards:
 				card.change_parent(stack.zone)
 				last_moved_to_stack = stack.zone
 				return
 
 func add_random_card()->void:
 	if stacks:
-		var new_card = card_scene.instantiate()
+		var new_card
+		if randf() < 0.5:
+			new_card = card_scene.instantiate()
+		else:
+			new_card = card2_scene.instantiate()
 		new_card.connect("quick_move",quick_mover)
 		new_card.connect("update_last_moved_stack",set_last_moved_stack)
 		new_card.mana_cost = randi_range(0,4)
@@ -107,7 +113,7 @@ func add_random_card()->void:
 			add_child(new_card)
 			new_card.change_parent(random_zone_holder.zone)
 		new_card.update_position()
-
+	
 	await get_tree().process_frame
 	update_stacks()
 

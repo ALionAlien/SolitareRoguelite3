@@ -2,6 +2,8 @@
 class_name StackManagerX
 extends Control
 
+var zone_number : int = 0
+
 @export var default_width : float = 150:
 	set(value):
 		custom_minimum_size.x = value

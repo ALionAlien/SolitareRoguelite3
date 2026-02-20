@@ -1,22 +1,22 @@
-[gd_scene load_steps=10 format=3 uid="uid://d2qk0br0iubas"]
+[gd_scene load_steps=11 format=3 uid="uid://d2qk0br0iubas"]
 
 [ext_resource type="Script" uid="uid://wmhilo8ylxr4" path="res://Scenes/game_scene.gd" id="1_eqhe0"]
 [ext_resource type="Texture2D" uid="uid://ctwkagj50e4l0" path="res://Assets/Textures/eqn-dungeon.jpg" id="2_kilg5"]
-[ext_resource type="Script" uid="uid://ry5fw2vcrle3" path="res://Scenes/UI/ZoneLinup/LineupClass.gd" id="2_lohlh"]
-[ext_resource type="Script" uid="uid://qormu2i0j68u" path="res://Scenes/UI/ZoneLinup/Friendly_lineup.gd" id="2_x6js8"]
+[ext_resource type="Script" uid="uid://qormu2i0j68u" path="res://Scenes/UI/ZoneLinup/FriendlyLineupClass.gd" id="2_x6js8"]
 [ext_resource type="Script" uid="uid://c6x4m0si05rth" path="res://Classes/mouse_manager.gd" id="3_haeiw"]
 [ext_resource type="PackedScene" uid="uid://whns0bt3ryx4" path="res://Scenes/UI/FriendlyZone/friendly_zone_holder.tscn" id="3_x6js8"]
+[ext_resource type="Script" uid="uid://clsi61qhd3maw" path="res://Scenes/UI/ZoneLinup/EnemyLineupClass.gd" id="4_x6js8"]
 [ext_resource type="PackedScene" uid="uid://2oy0e67tb06n" path="res://Scenes/UI/EnemyStacks/enemy_zone_holder.tscn" id="5_x6js8"]
+[ext_resource type="Script" uid="uid://bq0uybv7uupr4" path="res://Scenes/trigger_manager.gd" id="8_lg2j6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x6js8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kilg5"]
 bg_color = Color(0.258824, 0.305882, 0.258824, 1)
 
-[node name="GameScene" type="Node2D" node_paths=PackedStringArray("friendly_lineup", "enemy_lineup")]
+[node name="GameScene" type="Node2D" node_paths=PackedStringArray("friendly_lineup")]
 script = ExtResource("1_eqhe0")
 friendly_lineup = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup")
-enemy_lineup = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
@@ -68,11 +68,12 @@ theme_override_constants/margin_bottom = 50
 [node name="ZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer"]
 layout_mode = 2
 script = ExtResource("2_x6js8")
-seperation = 24.5
 metadata/_custom_type_script = "uid://ry5fw2vcrle3"
 
 [node name="ZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+default_width = 150.0
 
 [node name="ZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" instance=ExtResource("3_x6js8")]
 layout_mode = 2
@@ -90,21 +91,22 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 40
 
-[node name="ZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer"]
+[node name="EnemyZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer"]
 layout_mode = 2
-script = ExtResource("2_lohlh")
-seperation = 21.35
-metadata/_custom_type_script = "uid://ry5fw2vcrle3"
+script = ExtResource("4_x6js8")
+seperation = 26.08
+metadata/_custom_type_script = "uid://clsi61qhd3maw"
 
-[node name="EnemyZoneHolder6" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
-custom_minimum_size = Vector2(276.6, 0)
-layout_mode = 2
-default_width = 276.6
-
-[node name="EnemyZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+[node name="EnemyZoneHolder" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup" instance=ExtResource("5_x6js8")]
 layout_mode = 2
 
-[node name="EnemyZoneHolder5" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/ZoneLineup" instance=ExtResource("5_x6js8")]
+[node name="EnemyZoneHolder2" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup" instance=ExtResource("5_x6js8")]
+layout_mode = 2
+
+[node name="EnemyZoneHolder3" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup" instance=ExtResource("5_x6js8")]
+layout_mode = 2
+
+[node name="EnemyZoneHolder4" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup" instance=ExtResource("5_x6js8")]
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
@@ -133,7 +135,11 @@ text = "Add Enemy Stack"
 layout_mode = 2
 text = "Flip Bottom Row"
 
-[node name="CardManager" type="Node2D" parent="."]
+[node name="CallCards" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
+layout_mode = 2
+text = "Call Cards"
+
+[node name="MouseManager" type="Node2D" parent="."]
 position = Vector2(-609028, 0)
 script = ExtResource("3_haeiw")
 metadata/_custom_type_script = "uid://c6x4m0si05rth"
@@ -144,7 +150,13 @@ scale = Vector2(1.38592, 1.38592)
 texture = ExtResource("2_kilg5")
 centered = false
 
+[node name="TriggerManager" type="Node" parent="." node_paths=PackedStringArray("friendly_zones", "Enemy_zones")]
+script = ExtResource("8_lg2j6")
+friendly_zones = NodePath("../CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup")
+Enemy_zones = NodePath("../CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup")
+
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_add_stack_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddCard" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_add_card_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddEnemyStack" to="." method="_on_add_enemy_stack_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddEnemyStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup" method="_on_add_enemy_stack_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/FlipBottomRow" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_flip_bottom_row_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/CallCards" to="TriggerManager" method="_on_call_cards_pressed"]

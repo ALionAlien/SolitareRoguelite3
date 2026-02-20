@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://d2tlkbwyglkn7" path="res://Scenes/UI/manager_y_class.gd" id="2_8afa0"]
 
 [node name="XManager" type="Control" node_paths=PackedStringArray("zone", "manager_y")]
-custom_minimum_size = Vector2(150.085, 0)
+custom_minimum_size = Vector2(199.235, 0)
 layout_mode = 3
 anchors_preset = 13
 anchor_left = 0.5
@@ -16,7 +16,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("1_uoxua")
-default_width = 150.085
+default_width = 199.235
 zone = NodePath("YManager/StackZone")
 manager_y = NodePath("YManager")
 metadata/_custom_type_script = "uid://cuagq8jxtnsat"

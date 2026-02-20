@@ -97,7 +97,7 @@ func drop_check():
 	if hover_target:
 		var target_parent = hover_target.get_parent()
 		#var card_target : Card = hover_target.get_parent()
-		if hover_target is StackZone and hover_target.is_empty:
+		if hover_target is StackZone and !hover_target.has_cards:
 			change_parent(hover_target)
 		if target_parent is Card:
 			var bottom_of_stack : Card = target_parent.get_bottom_card()
@@ -129,7 +129,8 @@ func drag_exited():
 	#check_stack_upwards()
 	#get_bottom_card().calculate_total_mana()
 	set_children_z_index(0)
-	get_manager_y().set_gap()
+	if get_manager_y():
+		get_manager_y().set_gap()
 	get_bottom_card().calculate_total_mana()
 
 
@@ -214,6 +215,9 @@ func is_legal_drop(target_card : Card)->bool:
 	return false
 
 func change_parent(new_parent : Node)->void:
+	if new_parent is Card or StackZone:
+		if new_parent.get_bottom_card() == get_bottom_card():
+			return
 	#call old parent's methods
 	var old_parent = get_parent()
 	var old_stack_zone : StackManagerY = get_manager_y()
@@ -321,3 +325,12 @@ func update_ignore_list()->void:
 func emit_all_signals()->void:
 	quick_move.emit()
 	update_last_moved_stack.emit()
+
+
+
+func enemy_dealt_damage()->void:
+	pass
+
+
+func hand_played()->void:
+	pass
