@@ -9,21 +9,22 @@ var resource_path : String = "res://Resources/CardResources/TestCard"
 var resource_extention : String = ".tres"
 
 var enemy_holders : Array[StackManagerX] = []
-var stacks : Array[StackManagerX] = []
+
 var last_moved_to_stack : StackZone = null
 #var last_moved_from_stack : StackZone = null
 var children_count : int
-
+#
 @export var seperation : float = 4.0 :
 	set(value):
-		seperation = max(0,value)
+		seperation = value
 		recalculate_seperation()
 
-func _ready():
-	update_stacks()
+#func _ready():
+	#update_stacks()
+	#recalculate_seperation()
 
-func _process(_delta)->void:
-		recalculate_seperation()
+#func _process(_delta)->void:
+		#recalculate_seperation()
 
 func recalculate_seperation()->void:
 	var new_scale : float = 1.0
@@ -37,7 +38,7 @@ func recalculate_seperation()->void:
 			if i >= 1:
 				vertical_gaps += 1
 	
-	total_holders_width += seperation * vertical_gaps
+	total_holders_width = total_holders_width + (seperation * vertical_gaps)
 	
 	if total_holders_width < size.x:
 		var empty_space : float = size.x - total_holders_width
@@ -57,19 +58,29 @@ func recalculate_seperation()->void:
 			#if i < children.size():
 			new_x_pos += seperation * new_scale
 
+#func _enter_tree():
+	#if self.is_node_ready():
+		#update_stacks()
+		#recalculate_seperation()
+
 func add_zone(scene : PackedScene)->void:
+	await get_tree().process_frame
 	var new_stack_holder := scene.instantiate()
 	add_child(new_stack_holder)
 	new_stack_holder.set_owner(get_tree().edited_scene_root)
-	update_stacks()
+	recalculate_seperation()
 
-func update_stacks()->void:
+func get_stacks()->Array[StackManagerX]:
 	var temp_stacks : Array[StackManagerX]
 	for child in get_children():
 		if child is StackManagerX:
 			temp_stacks.append(child)
-	stacks = temp_stacks
-	print(stacks)
+	return temp_stacks
+
+#func _enter_tree()->void:
+	#await get_tree().process_frame
+	#recalculate_seperation()
+	#update_stacks()
 
 func quick_mover(card : Card)->void:
 	if last_moved_to_stack and last_moved_to_stack != card.get_stack_zone():
@@ -80,7 +91,7 @@ func quick_mover(card : Card)->void:
 				return
 	#var filtered_stacks : Array[StackZone]
 	var bottom_card : Card = null
-	for stack in stacks:
+	for stack in get_stacks():
 		#ignore this stack if card belongs to it
 		if card.get_stack_zone() != stack.zone:
 			if stack.zone.get_bottom_card() is Card:
@@ -95,7 +106,8 @@ func quick_mover(card : Card)->void:
 				return
 
 func add_random_card()->void:
-	if stacks:
+	var stacks = get_stacks()
+	if stacks.size() > 0:
 		var new_card
 		if randf() < 0.5:
 			new_card = card_scene.instantiate()
@@ -113,9 +125,8 @@ func add_random_card()->void:
 			add_child(new_card)
 			new_card.change_parent(random_zone_holder.zone)
 		new_card.update_position()
-	
-	await get_tree().process_frame
-	update_stacks()
+	recalculate_seperation()
+
 
 #func random_card_data()->CardData:
 	##set back to 1 - 21
@@ -128,7 +139,7 @@ func set_last_moved_stack(stack : StackZone)->void:
 	last_moved_to_stack = stack
 
 func flip_bottom_row()->void:
-	update_stacks()
+	var stacks = get_stacks()
 	for stack in stacks:
 		if stack.zone.get_bottom_card() is Card:
 			stack.zone.get_bottom_card().flip_up()

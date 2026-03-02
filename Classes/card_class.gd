@@ -97,7 +97,7 @@ func drop_check():
 	if hover_target:
 		var target_parent = hover_target.get_parent()
 		#var card_target : Card = hover_target.get_parent()
-		if hover_target is StackZone and !hover_target.has_cards:
+		if hover_target is StackZone and !hover_target.has_cards():
 			change_parent(hover_target)
 		if target_parent is Card:
 			var bottom_of_stack : Card = target_parent.get_bottom_card()
@@ -123,7 +123,6 @@ func drag_entered():
 		is_dragging = true
 		get_manager_y().set_gap()
 
-
 func drag_exited():
 	super.drag_exited()
 	#check_stack_upwards()
@@ -133,14 +132,12 @@ func drag_exited():
 		get_manager_y().set_gap()
 	get_bottom_card().calculate_total_mana()
 
-
 func flip_down():
 	pass
 
 func flip_up():
 	#card_data.test_function(4)
 	var all_cards : Array = get_tree().get_nodes_in_group("Card")
-	print(all_cards)
 	for card in all_cards:
 		if card is Card:
 			print("detected")
@@ -148,35 +145,9 @@ func flip_up():
 		
 	get_bottom_card().calculate_total_mana()
 
-
 func another_card_flipped(flipped_card : Card):
 	if flipped_card != self and flipped_up:
 		print(self)
-#func check_stack_upwards()->void:
-	
-	#clear_upwards()
-	#total_stack_mana = card_data.mana_cost
-	#var has_child_card : bool = false
-	#for child in get_children():
-		#if child is Card:
-			#if !child.is_dragging:
-				#has_child_card = true
-			##if has child card and child IS in stack, check the legality of dropping and set self in stack if passed
-			#if child.is_in_stack:
-				#total_stack_mana += child.total_stack_mana
-				#if is_legal_drop(child):
-					#is_in_stack = true
-					#draggable = true
-					#update_data()
-	##set in stack if no kids found (excluding dragged cards)
-	#if !has_child_card and !drop_lock:
-		#is_in_stack = true
-		#draggable = true
-		#total_stack_mana = card_data.mana_cost
-		#update_data()
-	##propagate up partents
-	#if get_parent() is Card:
-		#get_parent().check_stack_upwards()
 
 func check_stack_upwards()->void:
 	for child in get_children():
@@ -289,7 +260,6 @@ func get_stack_zone()->StackZone:
 	else:
 		return null
 
-
 func get_manager_y()->StackManagerY:
 	if get_parent() is Card:
 		return get_parent().get_manager_y()
@@ -312,25 +282,13 @@ func set_children_z_index(index : int)->void:
 #this is useful so nodes dont detect their own stack as viable drop targets
 func update_ignore_list()->void:
 	var temp_ignore_ist : Array[Droppable]
-	#temp_ignore_ist.append(self)
-	#var highest_parent : Card = get_top_card()
-	#if highest_parent.get_parent() is StackZone:
-		#temp_ignore_ist.append(highest_parent.get_parent())
 	for child in get_all_children(self):
 		if child is Droppable:
 			temp_ignore_ist.append(child)
 	drop_ignore_list = temp_ignore_ist
 
-#this function only exits to remove yellow error from editor
-func emit_all_signals()->void:
-	quick_move.emit()
-	update_last_moved_stack.emit()
-
-
-
 func enemy_dealt_damage()->void:
 	pass
-
 
 func hand_played()->void:
 	pass

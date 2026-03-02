@@ -15,13 +15,13 @@ func trigger_ability(method : String)->void:
 
 func get_all_friendly_cards()->Array[Card]:
 	var array : Array[Card] = []
-	for stack in friendly_zones.stacks:
+	for stack in friendly_zones.get_stacks():
 		array.append_array(stack.zone.get_all_cards_in_stack())
 	return array
 
 
 func get_all_enemy_cards()->Array[Card]:
 	var array : Array[Card] = []
-	for stack in Enemy_zones.stacks:
+	for stack in Enemy_zones.get_stacks():
 		array.append_array(stack.zone.get_all_cards_in_stack())
 	return array

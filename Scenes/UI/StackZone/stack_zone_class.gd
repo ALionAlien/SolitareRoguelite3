@@ -6,7 +6,12 @@ signal stack_changed
 @export var ManagerX : StackManagerX = null
 @export var ManagerY : StackManagerY = null
 
-var has_cards : bool = true
+func has_cards() -> bool:
+	var card : Card = get_bottom_card()
+	if card:
+		return true
+	else:
+		return false
 
 func get_all_cards_in_stack()->Array[Card]:
 	var cards_below : Array[Card]
@@ -30,18 +35,9 @@ func get_all_cards_not_dragging()->Array[Card]:
 
 func _enter_tree()->void:
 	await self.ready
-	check_empty()
 
 func _exit_tree()->void:
 	await self.ready
-	check_empty()
-
-func check_empty()->void:
-	if get_all_cards_in_stack().size() >= 1:
-		has_cards = true
-	else:
-		has_cards = false
-	print(has_cards)
 
 func card_entered()->void:
 	stack_changed.emit()
