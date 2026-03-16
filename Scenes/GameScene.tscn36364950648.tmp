@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d2qk0br0iubas"]
+[gd_scene load_steps=9 format=3 uid="uid://d2qk0br0iubas"]
 
 [ext_resource type="Script" uid="uid://wmhilo8ylxr4" path="res://Scenes/game_scene.gd" id="1_eqhe0"]
 [ext_resource type="Texture2D" uid="uid://ctwkagj50e4l0" path="res://Assets/Textures/eqn-dungeon.jpg" id="2_kilg5"]
@@ -12,18 +12,16 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kilg5"]
 bg_color = Color(0.258824, 0.305882, 0.258824, 1)
 
-[node name="GameScene" type="Node2D" unique_id=899007837 node_paths=PackedStringArray("friendly_lineup", "enemy_lineup", "test_label")]
+[node name="GameScene" type="Node2D" node_paths=PackedStringArray("friendly_lineup")]
 script = ExtResource("1_eqhe0")
 friendly_lineup = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup")
-enemy_lineup = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup")
-test_label = NodePath("CanvasLayer/VBoxContainer2/Panel2/MarginContainer/TextEdit")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=391990623]
+[node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1265260156]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer" unique_id=208323129]
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,37 +29,33 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/VBoxContainer2" unique_id=1222447798]
-custom_minimum_size = Vector2(0, 53.77)
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 27.32)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel2" unique_id=1040654774]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel2"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextEdit" type="TextEdit" parent="CanvasLayer/VBoxContainer2/Panel2/MarginContainer" unique_id=869256248]
-layout_mode = 2
-text = "svsvsdv"
-
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2" unique_id=264378435]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
 custom_minimum_size = Vector2(50.23, 145.645)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HSplitContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel" unique_id=966041831]
+[node name="HSplitContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/Panel"]
 custom_minimum_size = Vector2(0, 463.475)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Panel2" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer" unique_id=389579369]
+[node name="Panel2" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_x6js8")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2" unique_id=120242481]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2"]
 custom_minimum_size = Vector2(0.48, 0)
 layout_mode = 2
 theme_override_constants/margin_left = 50
@@ -69,91 +63,87 @@ theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="ZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer" unique_id=892213461 groups=["save"]]
+[node name="ZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer" groups=["save"]]
 layout_mode = 2
 script = ExtResource("2_x6js8")
-seperation = 10.96
+seperation = 19.83
 metadata/_custom_type_script = "uid://ry5fw2vcrle3"
 
-[node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer" unique_id=753787425]
+[node name="Panel" type="PanelContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kilg5")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel" unique_id=1556576309]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 40
 
-[node name="EnemyZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer" unique_id=1809313799]
+[node name="EnemyZoneLineup" type="Container" parent="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer"]
 layout_mode = 2
 script = ExtResource("4_x6js8")
 seperation = 38.725
 metadata/_custom_type_script = "uid://clsi61qhd3maw"
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer2" unique_id=701238141]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer2"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/PanelContainer" unique_id=2076649533]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer2/PanelContainer"]
 layout_mode = 2
 theme_override_constants/separation = 60
 
-[node name="AddStack" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=857373037]
+[node name="AddStack" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Add Card Stack"
 
-[node name="AddCard" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=1327219279]
+[node name="AddCard" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Add a Card"
 
-[node name="AddEnemyStack" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=1693171949]
+[node name="AddEnemyStack" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "Add Enemy Stack"
 
-[node name="FlipBottomRow" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=82420080]
+[node name="FlipBottomRow" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Flip Bottom Row"
 
-[node name="CallCards" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=1896502022]
+[node name="CallCards" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Call Cards"
 
-[node name="Save" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=2094602392]
+[node name="Save" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Save"
 
-[node name="ModifyData" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=735445420]
-layout_mode = 2
-text = "ModifyData"
-
-[node name="Load" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer" unique_id=1341763417]
+[node name="Load" type="Button" parent="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer"]
 layout_mode = 2
 text = "Load
 "
 
-[node name="MouseManager" type="Node2D" parent="." unique_id=1632379404]
+[node name="MouseManager" type="Node2D" parent="."]
 position = Vector2(-609028, 0)
 script = ExtResource("3_haeiw")
 metadata/_custom_type_script = "uid://c6x4m0si05rth"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=226538991]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-335.409, -189)
 scale = Vector2(1.38592, 1.38592)
 texture = ExtResource("2_kilg5")
 centered = false
 
-[node name="TriggerManager" type="Node" parent="." unique_id=1969939889 node_paths=PackedStringArray("friendly_zones", "Enemy_zones")]
+[node name="TriggerManager" type="Node" parent="." node_paths=PackedStringArray("friendly_zones", "Enemy_zones")]
 script = ExtResource("8_lg2j6")
 friendly_zones = NodePath("../CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup")
 Enemy_zones = NodePath("../CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup")
 
-[node name="Timer" type="Timer" parent="." unique_id=1429731185]
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_add_stack_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddCard" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_add_card_pressed"]
@@ -161,6 +151,5 @@ Enemy_zones = NodePath("../CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Pane
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/FlipBottomRow" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/ZoneLineup" method="_on_flip_bottom_row_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/CallCards" to="TriggerManager" method="_on_call_cards_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/ModifyData" to="." method="_on_modify_data_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/Load" to="." method="_on_load_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

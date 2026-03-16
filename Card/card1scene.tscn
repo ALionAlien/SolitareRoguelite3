@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmheugr1s8ptc"]
+[gd_scene format=3 uid="uid://bmheugr1s8ptc"]
 
-[ext_resource type="PackedScene" uid="uid://dc27ppsjs4hd5" path="res://Card/CardScene.tscn" id="1_orlms"]
-[ext_resource type="Script" uid="uid://bce17ljiq0xmf" path="res://Card/card_1_scene.gd" id="2_v078i"]
+[ext_resource type="PackedScene" uid="uid://dc27ppsjs4hd5" path="res://Card/CardScene.tscn" id="1_1ubdb"]
+[ext_resource type="Script" uid="uid://bce17ljiq0xmf" path="res://Card/card_1_scene.gd" id="2_nwxpn"]
 
-[sub_resource type="Shader" id="Shader_v078i"]
+[sub_resource type="Shader" id="Shader_1ubdb"]
 resource_local_to_scene = true
 code = "/// Faux 3D Perspective Shader for 2D CanvasItems in Godot.
 /// By CodeVogel (https://codevogel.com), based on Hei's '2D-perspective' shader (https://godotshaders.com/shader/2d-perspective/)
@@ -68,9 +68,9 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnmfe"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwxpn"]
 resource_local_to_scene = true
-shader = SubResource("Shader_v078i")
+shader = SubResource("Shader_1ubdb")
 shader_parameter/cull_backface = false
 shader_parameter/use_front = false
 shader_parameter/fov = 60.0
@@ -78,8 +78,9 @@ shader_parameter/rot_y_deg = 180.0
 shader_parameter/rot_x_deg = 0.0
 shader_parameter/inset = 0.0
 
-[node name="Card1Scene" instance=ExtResource("1_orlms")]
-script = ExtResource("2_v078i")
+[node name="Card1Scene" unique_id=554740951 instance=ExtResource("1_1ubdb")]
+script = ExtResource("2_nwxpn")
+scene_path = "res://Card/card1scene.tscn"
 
-[node name="CardVisual" parent="ScaleController" index="0"]
-material = SubResource("ShaderMaterial_bnmfe")
+[node name="CardVisual" parent="ScaleController" parent_id_path=PackedInt32Array(1041122731) index="0" unique_id=64169096]
+material = SubResource("ShaderMaterial_nwxpn")

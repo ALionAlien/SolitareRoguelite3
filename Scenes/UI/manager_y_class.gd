@@ -12,13 +12,17 @@ func _process(_delta)->void:
 		set_gap()
 	set_gap()
 
+func _exit_tree():
+	set_gap()
+
+func _enter_tree():
+	set_gap()
+
 func card_entered()->void:
-	#set_gap()
-	pass
+	set_gap()
 
 func card_exited()->void:
-	#set_gap()
-	pass
+	set_gap()
 
 func set_gap()->void:
 	var cards : Array[Card] = zone.get_all_cards_not_dragging()

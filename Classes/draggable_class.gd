@@ -16,9 +16,6 @@ var click_check : float = 0
 var click_check_threashold : float = 1.16
 var click_position : Vector2 = Vector2.ZERO
 
-func _ready():
-	update_data()
-
 func _process(delta)->void:
 	#add delta to click check
 	if click_check >= 1.0 and click_check <= click_check_threashold:

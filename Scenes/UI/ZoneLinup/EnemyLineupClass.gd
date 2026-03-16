@@ -6,4 +6,4 @@ var enemy_holder_scene : PackedScene = preload("res://Scenes/UI/EnemyStacks/enem
 
 
 func _on_add_enemy_stack_pressed():
-	add_zone(enemy_holder_scene)
+	add_zone()

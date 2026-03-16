@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dc27ppsjs4hd5"]
+[gd_scene format=3 uid="uid://dc27ppsjs4hd5"]
 
 [ext_resource type="Script" uid="uid://bdu1jgfk5rbry" path="res://Card/card_scene.gd" id="1_833ip"]
 [ext_resource type="PackedScene" uid="uid://bcfsl0q7pxmup" path="res://card_visual.tscn" id="2_7ujh4"]
@@ -71,7 +71,7 @@ void fragment() {
 	}
 }"
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bnmfe"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ievre"]
 resource_local_to_scene = true
 shader = SubResource("Shader_bnmfe")
 shader_parameter/cull_backface = false
@@ -81,29 +81,30 @@ shader_parameter/rot_y_deg = 180.0
 shader_parameter/rot_x_deg = 0.0
 shader_parameter/inset = 0.0
 
-[node name="CardScene" type="Area2D" node_paths=PackedStringArray("visual") groups=["Card"]]
+[node name="CardScene" type="Area2D" unique_id=841182350 node_paths=PackedStringArray("visual") groups=["Card"]]
 script = ExtResource("1_833ip")
 visual = NodePath("ScaleController/CardVisual")
+scene_path = "res://Card/CardScene.tscn"
 metadata/_custom_type_script = "uid://dtu16lqa6gjxi"
 
-[node name="Scale_manager" type="RemoteTransform2D" parent="."]
+[node name="Scale_manager" type="RemoteTransform2D" parent="." unique_id=1287877606]
 remote_path = NodePath("../ScaleController")
 update_scale = false
 script = ExtResource("2_bnmfe")
 
-[node name="ScaleController" type="Node2D" parent="."]
+[node name="ScaleController" type="Node2D" parent="." unique_id=1041122731]
 top_level = true
 
-[node name="CardVisual" parent="ScaleController" instance=ExtResource("2_7ujh4")]
-material = SubResource("ShaderMaterial_bnmfe")
+[node name="CardVisual" parent="ScaleController" unique_id=64169096 instance=ExtResource("2_7ujh4")]
+material = SubResource("ShaderMaterial_ievre")
 pivot_offset = Vector2(75, 105)
 
-[node name="DroppableCardArea" type="Area2D" parent="."]
+[node name="DroppableCardArea" type="Area2D" parent="." unique_id=1998832850]
 script = ExtResource("3_833ip")
 metadata/_custom_type_script = "uid://dox3uvwlby1rb"
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="DroppableCardArea"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DroppableCardArea" unique_id=1579201815]
 shape = ExtResource("3_7ujh4")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=632815706]
 shape = ExtResource("3_7ujh4")

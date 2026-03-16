@@ -4,6 +4,7 @@ extends Draggable
 signal quick_move(card : Card)
 signal update_last_moved_stack(stack : StackZone)
 
+@export var scene_path : String
 
 var mana_cost : int = 0
 
@@ -76,12 +77,11 @@ var is_in_stack : bool = false :
 var card_gap : float = 0
 
 func _ready():
-	super._ready()
-	update_position()
-	update_data()
 	if self == get_bottom_card():
 		#check_stack_upwards()
 		calculate_total_mana()
+	#update_position()
+	#update_data()
 
 func _process(delta):
 	super._process(delta)

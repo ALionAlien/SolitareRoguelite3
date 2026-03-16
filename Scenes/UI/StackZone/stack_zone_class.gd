@@ -2,9 +2,19 @@
 class_name StackZone
 extends Droppable
 
-signal stack_changed
-@export var ManagerX : StackManagerX = null
-@export var ManagerY : StackManagerY = null
+#signal stack_changed
+#@export var ManagerX : ZoneHolder = null
+
+func add_card(path : String, flipped : bool)->void:
+	var card_packed : PackedScene = load(path)
+	var new_card = card_packed.instantiate()
+
+	if get_bottom_card() is Card:
+		get_bottom_card().add_child(new_card)
+	else:
+		add_child(new_card)
+	if flipped:
+		pass
 
 func has_cards() -> bool:
 	var card : Card = get_bottom_card()
@@ -33,14 +43,14 @@ func get_all_cards_not_dragging()->Array[Card]:
 			return child.get_all_cards_not_dragging(cards_below)
 	return cards_below
 
-func _enter_tree()->void:
-	await self.ready
+#func _enter_tree()->void:
+	#await self.ready
+#
+#func _exit_tree()->void:
+	#await self.ready
 
-func _exit_tree()->void:
-	await self.ready
-
-func card_entered()->void:
-	stack_changed.emit()
-
-func card_exited()->void:
-	stack_changed.emit()
+#func card_entered()->void:
+	#stack_changed.emit()
+#
+#func card_exited()->void:
+	#stack_changed.emit()

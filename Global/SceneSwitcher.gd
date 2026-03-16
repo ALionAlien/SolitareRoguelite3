@@ -14,6 +14,7 @@ func switch_scene(scene : PackedScene):
 	call_deferred("_deferred_switch_scene", scene)
 
 func _deferred_switch_scene(scene : PackedScene):
+	print(scene)
 	current_scene.free()
 	#print(current_scene.transform.basis)
 	var new_scene : PackedScene = scene

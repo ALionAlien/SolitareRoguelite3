@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dm56iekr2l361"]
+[gd_scene format=3 uid="uid://dm56iekr2l361"]
 
 [ext_resource type="Script" uid="uid://c2pjxdvb05esl" path="res://Scenes/UI/StackZone/stack_zone_class.gd" id="1_2ykgh"]
 [ext_resource type="Shape2D" uid="uid://dye4j1iq8fian" path="res://Resources/CardShape.tres" id="2_s36xq"]
@@ -7,14 +7,14 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1who"]
 bg_color = Color(0, 0, 0, 0.54902)
 
-[node name="StackZone" type="Area2D"]
+[node name="StackZone" type="Area2D" unique_id=1673241611]
 script = ExtResource("1_2ykgh")
 metadata/_custom_type_script = "uid://c2pjxdvb05esl"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=11875466]
 shape = ExtResource("2_s36xq")
 
-[node name="ColorRect" type="Panel" parent="."]
+[node name="ColorRect" type="Panel" parent="." unique_id=506375361]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

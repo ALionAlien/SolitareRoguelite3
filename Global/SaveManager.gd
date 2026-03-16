@@ -1,32 +1,29 @@
 extends Node
 
-const encrypted_path := "user://save_encrypted.data"
+const encrypted_path := "user://save_encrypted.dat"
 const temp_path := "user://temp_load.tres"
 var data : SaveData
 
-func _ready():
-	await get_tree().process_frame
+func _ready()->void:
+	data = SaveData.new()
+
+func new_save()->void:
 	if save_exists():
-		load_save()
-	else:
-		data = SaveData.new()
-		data.create_empty_save()
+		delete_save()
+	data = SaveData.new()
+	save_game()
 
 func save_game() -> void:
 	get_tree().call_group("save", "save_data")
 	save_encrypted_resource(data, encrypted_path, get_encryption_password())
-	
-func load_save() -> void:
-	if not FileAccess.file_exists(encrypted_path):
-		return
-	data = load_encrypted_resource(encrypted_path, get_encryption_password())
-	get_tree().call_group("save", "load_data")
+
+func load_game() -> void:
+	if save_exists():
+		data = load_encrypted_resource(encrypted_path, get_encryption_password())
+		get_tree().call_group("save", "load_data")
 
 func save_exists() -> bool:
-	if FileAccess.file_exists(encrypted_path):
-		return true
-	else:
-		return false
+	return FileAccess.file_exists(encrypted_path)
 
 func delete_save()->void:
 	if FileAccess.file_exists(encrypted_path):
@@ -37,9 +34,11 @@ func delete_save()->void:
 			print("Failed to delete save file, error code: ", error)
 	else:
 		print("Save file not found: ", encrypted_path)
-func save_encrypted_resource(resource: Resource, _path: String, password: String) -> void:
+
+func save_encrypted_resource(resource: SaveData, _path: String, password: String) -> void:
+	var copy_res : SaveData = resource.duplicate()
 	#save resource in temporary file
-	ResourceSaver.save(resource, temp_path)
+	ResourceSaver.save(copy_res, temp_path)
 	
 	#get the buffer of the temp file as read only and close it
 	var file = FileAccess.open(temp_path, FileAccess.READ)
@@ -55,34 +54,27 @@ func save_encrypted_resource(resource: Resource, _path: String, password: String
 	DirAccess.remove_absolute(temp_path)
 	
 func load_encrypted_resource(_path: String, password: String) -> Resource:
-	#use password to open the encrypted file in read mode
 	var file = FileAccess.open_encrypted_with_pass(_path, FileAccess.READ, password)
-	
-	#return nothing if it fails to load
 	if not file:
-		push_error("failed to open encrypted file")
+		push_error("Failed to open encrypted file.")
 		return null
-	
-	#retrieve the buffer from the encrypted save file
+ 
 	var buffer = file.get_buffer(file.get_length())
 	file.close()
-	
-	#open a temporary file and store the buffer of the encrypted file
+ 
 	var temp_file = FileAccess.open(temp_path, FileAccess.WRITE)
 	temp_file.store_buffer(buffer)
 	temp_file.close()
-	
-	#load the resource temporary file then delete it
+ 
 	var res = ResourceLoader.load(temp_path)
 	DirAccess.remove_absolute(temp_path)
-	
-	#return the resource from temporary file
+ 
 	return res
 
 func get_encryption_password():
 	#salt refers to random data added before it gets hashed
 	#salt should be generated in game, NEVER hardcode salt
-	var salt = "Pass"
+	var salt = "Password"
 	#convert the password into a hash string making it harder to decipher
 	#OS id is unique to device so saves from other devices cannot be loaded
 	#OS id might change if user raplaces hardware making their saves unaccessable

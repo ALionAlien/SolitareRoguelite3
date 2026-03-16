@@ -14,8 +14,7 @@ func _ready()->void:
 	update_buttons()
 
 func _on_newgame_pressed():
-	SaveManager.save_game()
-	SaveManager.data.game_scene = default_game_scene
+	SaveManager.new_save()
 	SceneSwitcher.switch_scene(default_game_scene)
 
 func _on_delete_save_pressed():
@@ -23,4 +22,5 @@ func _on_delete_save_pressed():
 	update_buttons()
 
 func _on_continue_button_pressed():
+	SaveManager.load_game()
 	SceneSwitcher.switch_scene(default_game_scene)

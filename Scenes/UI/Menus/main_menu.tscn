@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://mo7ss0jogbaq"]
+[gd_scene format=3 uid="uid://mo7ss0jogbaq"]
 
 [ext_resource type="Script" uid="uid://u1tcyscs8hku" path="res://main_menu.gd" id="1_055id"]
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=742346988]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_055id")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1141189677]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ theme_override_constants/margin_top = 100
 theme_override_constants/margin_right = 500
 theme_override_constants/margin_bottom = 100
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=924037832]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.317
@@ -37,11 +37,11 @@ offset_bottom = -0.34002686
 theme_override_constants/separation = 6
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1178082987]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ContinueButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ContinueButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1121379225]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -49,27 +49,27 @@ theme_override_font_sizes/font_size = 35
 disabled = true
 text = "Continue"
 
-[node name="DeleteSave" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="DeleteSave" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1678560883]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 disabled = true
 text = "  Delete  "
 
-[node name="Newgame" type="Button" parent="VBoxContainer"]
+[node name="Newgame" type="Button" parent="VBoxContainer" unique_id=613137325]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "NewGame"
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=256146520]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35
 text = "Options
 "
 
-[node name="Button4" type="Button" parent="VBoxContainer"]
+[node name="Button4" type="Button" parent="VBoxContainer" unique_id=315077154]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 35

@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://whns0bt3ryx4"]
+[gd_scene format=3 uid="uid://whns0bt3ryx4"]
 
 [ext_resource type="Script" uid="uid://cuagq8jxtnsat" path="res://Scenes/UI/manager_x_class.gd" id="1_uoxua"]
 [ext_resource type="PackedScene" uid="uid://dm56iekr2l361" path="res://Scenes/UI/StackZone/stack_zone.tscn" id="2_7xmng"]
 [ext_resource type="Script" uid="uid://d2tlkbwyglkn7" path="res://Scenes/UI/manager_y_class.gd" id="2_8afa0"]
 
-[node name="XManager" type="Control" node_paths=PackedStringArray("zone", "manager_y")]
+[node name="XManager" type="Control" unique_id=928172115 node_paths=PackedStringArray("zone")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 3
 anchors_preset = 13
@@ -13,14 +13,13 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_vertical = 3
+size_flags_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_uoxua")
 zone = NodePath("YManager/StackZone")
-manager_y = NodePath("YManager")
 metadata/_custom_type_script = "uid://cuagq8jxtnsat"
 
-[node name="YManager" type="Control" parent="." node_paths=PackedStringArray("zone")]
+[node name="YManager" type="Control" parent="." unique_id=34000737 node_paths=PackedStringArray("zone")]
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
@@ -32,8 +31,12 @@ script = ExtResource("2_8afa0")
 zone = NodePath("StackZone")
 metadata/_custom_type_script = "uid://d2tlkbwyglkn7"
 
-[node name="StackZone" parent="YManager" node_paths=PackedStringArray("ManagerX", "ManagerY") instance=ExtResource("2_7xmng")]
-ManagerX = NodePath("../..")
-ManagerY = NodePath("..")
+[node name="StackZone" parent="YManager" unique_id=191206440 instance=ExtResource("2_7xmng")]
 
-[connection signal="stack_changed" from="YManager/StackZone" to="." method="_on_stack_zone_stack_changed"]
+[node name="Panel" type="Panel" parent="." unique_id=1918286170]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
