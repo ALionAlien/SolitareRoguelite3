@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 SaveManager="*res://Global/SaveManager.gd"
 SceneSwitcher="*res://Global/SceneSwitcher.gd"
+TriggerTimer="*uid://dupla67hscjtn"
 
 [debug]
 

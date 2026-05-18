@@ -6,6 +6,12 @@ extends Node2D
 @export var mouse_manager : MouseManager
 @export var trigger_timer : Timer
 
+@export var trigger_timer_min : float = 0.5
+@export var trigger_timer_additional : float = 0.5
+#how much the 'trigger timer additional' gets divided by each process
+@export var trigger_timer_step : float = 0.3
+var trigger_timer_additional_temp : float
+var trigger_duration_total : float
 
 func _ready()->void:
 	SaveManager.load_game()
@@ -57,6 +63,9 @@ func _on_trigger_tick_timeout()->void:
 
 
 func process_cards()->void:
+	trigger_timer.wait_time = TriggerTimer.trigger_duration
+	TriggerTimer.increase_speed()
+	#get_all_friendly_cards()
 	for stack in enemy_zones.get_stacks():
 		if stack.has_card():
 			stack.process_attack()
@@ -68,6 +77,7 @@ func process_cards()->void:
 #the signal connect method is in the stacksone class in the add_card function
 func _card_moved(_moved_card : Card)->void:
 	recaultulate_stacks()
-	_on_trigger_tick_timeout()
 	mouse_manager.can_drag = false
+	_on_trigger_tick_timeout()
+	TriggerTimer.reset_duration()
 	trigger_timer.start()

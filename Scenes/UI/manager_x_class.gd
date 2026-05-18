@@ -58,5 +58,11 @@ func has_card()-> bool:
 
 func process_attack()->void:
 	if zone.has_cards():
-		health.value -= zone.get_next_card().base_damage
-		zone.get_next_card().remove()
+		if zone.get_next_card().strikes > 0:
+			zone.get_next_card().trigger_animation()
+			health.value -= zone.get_next_card().base_damage
+			zone.get_next_card().strikes -= 1
+			print(zone.get_next_card().strikes)
+		else:
+			zone.get_next_card().remove()
+			#pass

@@ -18,6 +18,9 @@ enemy_zones = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/M
 test_label = NodePath("CanvasLayer/VBoxContainer2/Panel2/MarginContainer/TextEdit")
 mouse_manager = NodePath("MouseManager")
 trigger_timer = NodePath("TriggerTick")
+trigger_timer_min = 0.16
+trigger_timer_additional = 0.45
+trigger_timer_step = 0.9
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=391990623]
 anchor_mode = 0

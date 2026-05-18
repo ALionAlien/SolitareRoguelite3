@@ -1,14 +1,12 @@
 extends Card
 
-@export var visual : CardVisual
-
 func _ready():
 	super.ready()
 	update_data()
 
 func update_data()->void:
 	var background : TextureRect = visual.background
-	visual.card_label.text = str(base_damage)
+	visual.card_label.text = str(base_damage) + "  " + ability_text
 	if drop_lock:
 		background.modulate =  Color(0.5, 0.5, 0.5, 1) #grayed out
 	#elif is_dragging:

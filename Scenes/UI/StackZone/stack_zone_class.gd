@@ -51,15 +51,3 @@ func get_next_card()->Card:
 		if child is Card:
 			return child
 	return null
-
-#func _enter_tree()->void:
-	#await self.ready
-#
-#func _exit_tree()->void:
-	#await self.ready
-
-#func card_entered()->void:
-	#stack_changed.emit()
-#
-#func card_exited()->void:
-	#stack_changed.emit()

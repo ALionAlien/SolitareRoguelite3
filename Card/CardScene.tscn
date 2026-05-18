@@ -81,10 +81,12 @@ shader_parameter/rot_y_deg = 180.0
 shader_parameter/rot_x_deg = 0.0
 shader_parameter/inset = 0.0
 
-[node name="CardScene" type="Area2D" unique_id=841182350 node_paths=PackedStringArray("visual") groups=["Card"]]
+[node name="CardScene" type="Area2D" unique_id=841182350 node_paths=PackedStringArray("visual", "scale_controller") groups=["Card"]]
 script = ExtResource("1_833ip")
-visual = NodePath("ScaleController/CardVisual")
 scene_path = "res://Card/CardScene.tscn"
+visual = NodePath("ScaleController/CardVisual")
+scale_controller = NodePath("ScaleController")
+ability_text = ""
 base_damage = 1
 metadata/_custom_type_script = "uid://dtu16lqa6gjxi"
 

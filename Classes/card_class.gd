@@ -8,11 +8,13 @@ signal flipped(card : Card)
 signal removed
 
 @export var scene_path : String
+@export var visual : CardVisual
+@export var scale_controller : Node2D
 
 var mana_cost : int = 0
 
-var test : String = "-"
-
+@export var ability_text : String = "double strike"
+var trigger_scale_tween : Tween
 var flipped_up : bool = false
 
 @export var base_damage : int = 0:
@@ -37,6 +39,8 @@ var damage_multiplier_stack_buff: int = 0:
 		damage_multiplier_stack_buff = value
 
 var total_damage : int = 0
+
+@export var strikes : int = 1
 
 var current_card_stack : StackZone = null
 var total_stack_mana : int = 0 :
@@ -294,6 +298,18 @@ func update_ignore_list()->void:
 		if child is Droppable:
 			temp_ignore_ist.append(child)
 	drop_ignore_list = temp_ignore_ist
+
+
+
+func trigger_animation()->void:
+	if trigger_scale_tween and trigger_scale_tween.is_valid():
+		trigger_scale_tween.kill() # Stops the old tween immediately
+	var pre_tween_scale : Vector2 = scale_controller.scale 
+	var tween_scale : Vector2 = Vector2(0.14,0.14)
+	trigger_scale_tween = create_tween()
+	trigger_scale_tween.tween_property(scale_controller, "scale", pre_tween_scale + tween_scale, TriggerTimer.trigger_duration/5) 
+	trigger_scale_tween.tween_property(scale_controller, "scale", pre_tween_scale, TriggerTimer.trigger_duration/5) 
+
 
 func enemy_dealt_damage()->void:
 	pass
