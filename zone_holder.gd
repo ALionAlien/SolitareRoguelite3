@@ -8,7 +8,7 @@ var zone_number : int = 0
 	set(value):
 		custom_minimum_size.x = value
 		default_width = max(150,value)
-		if get_parent() is ZoneLineup:
+		if get_parent() is FriendlyZoneLineup or EnemyZoneLineup:
 			get_parent().recalculate_seperation()
 
 @export var zone : StackZone

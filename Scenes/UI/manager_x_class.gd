@@ -2,13 +2,16 @@
 class_name StackManagerX
 extends Control
 
-var zone_number : int = 0
+var zone_number : int = 0 :
+	set(value):
+		#$Panel/Label.text = str(value)
+		zone_number=value
 
 @export var default_width : float = 150:
 	set(value):
 		custom_minimum_size.x = value
 		default_width = max(150,value)
-		if get_parent() is ZoneLineup:
+		if get_parent().has_method("recalculate_seperation"):
 			get_parent().recalculate_seperation()
 
 @export var zone : StackZone
@@ -17,8 +20,14 @@ var zone_number : int = 0
 
 var recalculated_card_gap : float
 
-#func _ready():
-	#self.size_flags_vertical = Control.SIZE_EXPAND
+#only edit y_pos if stackzone dimensions change.
+#If you need to edit the gap between stack and enemy visual-
+#change the seperation constant in vbox container
+var y_pos : int = 105 :
+	set(value):
+		if zone:
+			zone.position.y = value
+		y_pos = value
 
 func set_zone_scale(zone_scale : float)->void:
 	self.custom_minimum_size.x = default_width * zone_scale
@@ -27,7 +36,7 @@ func set_zone_scale(zone_scale : float)->void:
 	
 	#if size.x != custom_minimum_size.x:
 	set_deferred("size", Vector2(custom_minimum_size.x,size.y))
-	zone.position.y = 105 * zone_scale
+	zone.position.y = y_pos * zone_scale
 
 func get_rect2_from_collision(collision_shape_2d: CollisionShape2D) -> Rect2:
 	var shape = collision_shape_2d.shape
@@ -42,3 +51,15 @@ func get_rect2_from_collision(collision_shape_2d: CollisionShape2D) -> Rect2:
 	else:
 		# Return an empty Rect2 or handle other shapes
 		return Rect2()
+
+func has_card()-> bool:
+	return zone.has_cards()
+
+
+func process_attack()->void:
+	if zone.has_cards():
+		zone.get_next_card().remove()
+
+
+func _on_button_pressed():
+	process_attack()

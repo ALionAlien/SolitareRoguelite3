@@ -84,3 +84,4 @@ scene_path = "res://Card/card1scene.tscn"
 
 [node name="CardVisual" parent="ScaleController" parent_id_path=PackedInt32Array(1041122731) index="0" unique_id=64169096]
 material = SubResource("ShaderMaterial_nwxpn")
+pivot_offset = Vector2(150, 210)

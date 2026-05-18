@@ -76,7 +76,7 @@ resource_local_to_scene = true
 shader = SubResource("Shader_bnmfe")
 shader_parameter/cull_backface = false
 shader_parameter/use_front = false
-shader_parameter/fov = 60.0
+shader_parameter/fov = 33.0
 shader_parameter/rot_y_deg = 180.0
 shader_parameter/rot_x_deg = 0.0
 shader_parameter/inset = 0.0
@@ -94,10 +94,11 @@ script = ExtResource("2_bnmfe")
 
 [node name="ScaleController" type="Node2D" parent="." unique_id=1041122731]
 top_level = true
+scale = Vector2(0.5, 0.5)
 
 [node name="CardVisual" parent="ScaleController" unique_id=64169096 instance=ExtResource("2_7ujh4")]
 material = SubResource("ShaderMaterial_ievre")
-pivot_offset = Vector2(75, 105)
+pivot_offset = Vector2(150, 210)
 
 [node name="DroppableCardArea" type="Area2D" parent="." unique_id=1998832850]
 script = ExtResource("3_833ip")

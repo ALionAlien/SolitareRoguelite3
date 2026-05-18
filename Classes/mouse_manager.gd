@@ -1,7 +1,19 @@
 class_name MouseManager
 extends Node2D
 
+var can_drag : bool = true :
+	set(value):
+		if value:
+			pass
+		else:
+			is_dragging = false
+			current_target = null
+		can_drag = value
+	get():
+		return can_drag
+
 var is_dragging = false
+
 var current_target : Draggable = null :
 	set(target):
 		if target != current_target:
@@ -13,7 +25,7 @@ func _process(_delta):
 		update_raycast()
 
 func _input(event):
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton and can_drag:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.is_pressed():
 				is_dragging = true

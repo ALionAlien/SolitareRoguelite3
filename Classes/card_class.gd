@@ -3,28 +3,17 @@ extends Draggable
 
 signal quick_move(card : Card)
 signal update_last_moved_stack(stack : StackZone)
+signal moved(card: Card)
+signal flipped(card : Card)
+signal removed
 
 @export var scene_path : String
 
 var mana_cost : int = 0
 
-#@export var card_data : CardData = preload("res://Resources/CardResources/TestCard1.tres")
-#
-#var colors_array : Array[String] :
-	#set(value):
-		#colors_array = value
-	#get():
-		#if card_data == null:
-			#return colors_array
-		#var temp_colour_array : Array[String]
-		#if card_data.blue: temp_colour_array.append("blue")
-		#if card_data.red: temp_colour_array.append("red")
-		#if card_data.orange: temp_colour_array.append("orange")
-		#if card_data.purple: temp_colour_array.append("purple")
-		#if card_data.green: temp_colour_array.append("green")
-		#if card_data.white: temp_colour_array.append("white")
-		#if card_data.black: temp_colour_array.append("black")
-		#return temp_colour_array
+var test : String = "-"
+
+var flipped_up : bool = false
 
 @export var base_damage : int = 0:
 	set(value):
@@ -58,12 +47,12 @@ var total_stack_mana : int = 0 :
 			update_data()
 var max_stack_cost : int = 10
 
+func ready()->void:
+	pass
+
 func calculate_total_damage()->int:
 	var damage : int = base_damage
 	return damage
-
-var flipped_up : bool = false 
-#set(value)
 
 var drop_lock : bool = false :
 	set(value):
@@ -132,18 +121,18 @@ func drag_exited():
 		get_manager_y().set_gap()
 	get_bottom_card().calculate_total_mana()
 
-func flip_down():
-	pass
+func flip_down(_animate : bool):
+	if flipped_up:
+		flipped_up = false
 
-func flip_up():
-	#card_data.test_function(4)
-	var all_cards : Array = get_tree().get_nodes_in_group("Card")
-	for card in all_cards:
-		if card is Card:
-			print("detected")
-			#card.another_card_flipped(card)
-		
-	get_bottom_card().calculate_total_mana()
+func flip_up(_animate : bool):
+	if !flipped_up:
+		flipped_up = true
+		flipped.emit(self)
+		get_bottom_card().calculate_total_mana()
+
+func update_flip():
+	pass
 
 func another_card_flipped(flipped_card : Card):
 	if flipped_card != self and flipped_up:
@@ -193,9 +182,7 @@ func change_parent(new_parent : Node)->void:
 	var old_parent = get_parent()
 	var old_stack_zone : StackManagerY = get_manager_y()
 	if old_parent is Card:
-		if !old_parent.flipped_up:
-			old_parent.flip_up()
-		old_parent.get_bottom_card().calculate_total_mana()
+		old_parent.flip_up(true)
 	
 	self.reparent(new_parent)
 	global_scale = new_parent.global_scale
@@ -209,6 +196,7 @@ func change_parent(new_parent : Node)->void:
 		get_manager_y().card_entered()
 	update_position()
 	get_bottom_card().calculate_total_mana()
+	moved.emit(self)
 
 func update_position()->void:
 	if get_parent() is Card and get_manager_y():
@@ -260,6 +248,7 @@ func get_stack_zone()->StackZone:
 	else:
 		return null
 
+
 func get_manager_y()->StackManagerY:
 	if get_parent() is Card:
 		return get_parent().get_manager_y()
@@ -292,3 +281,14 @@ func enemy_dealt_damage()->void:
 
 func hand_played()->void:
 	pass
+
+func remove()->void:
+	var next_card : Card = get_next_card()
+	var parent = get_parent()
+	print(parent)
+	if next_card:
+		if parent is Card or StackZone:
+			#print(parent)
+			next_card.change_parent(parent)
+	#await get_tree().process_frame
+	#queue_free()

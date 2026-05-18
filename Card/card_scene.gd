@@ -3,6 +3,7 @@ extends Card
 @export var visual : CardVisual
 
 func _ready():
+	super.ready()
 	update_data()
 
 func update_data()->void:
@@ -44,16 +45,20 @@ func hover_exited()->void:
 func clicked()->void:
 	quick_move.emit(self)
 
-func flip_up():
-	flipped_up = true
-	super.flip_up()
-	var tween = create_tween()
-	tween.tween_property(visual, "rotation_y", 0, 0.6) \
-	.set_trans(Tween.TRANS_SINE)
+func flip_up(animate : bool):
+	super.flip_up(animate)
+	if animate:
+		var tween = create_tween()
+		tween.tween_property(visual, "rotation_y", 0, 0.6) \
+		.set_trans(Tween.TRANS_SINE)
+	else:
+		visual.rotation_y = 0
 
-func flip_down():
-	super.flip_down()
-	flipped_up = false
-	var tween = create_tween()
-	tween.tween_property(visual, "rotation_y", 180, 0.6) \
-	.set_trans(Tween.TRANS_SINE)
+func flip_down(animate : bool):
+	super.flip_down(animate)
+	if animate:
+		var tween = create_tween()
+		tween.tween_property(visual, "rotation_y", 180, 0.6) \
+		.set_trans(Tween.TRANS_SINE)
+	else:
+		visual.rotation_y = 180

@@ -1,10 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://2oy0e67tb06n"]
+[gd_scene format=3 uid="uid://2oy0e67tb06n"]
 
 [ext_resource type="Script" uid="uid://cuagq8jxtnsat" path="res://Scenes/UI/manager_x_class.gd" id="1_k6j32"]
 [ext_resource type="Script" uid="uid://d2tlkbwyglkn7" path="res://Scenes/UI/manager_y_class.gd" id="2_m7wy5"]
 [ext_resource type="PackedScene" uid="uid://dm56iekr2l361" path="res://Scenes/UI/StackZone/stack_zone.tscn" id="2_sm05g"]
 
-[node name="EnemyZoneHolder" type="Control" node_paths=PackedStringArray("zone", "manager_y")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7um1"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sm05g"]
+bg_color = Color(0.2627451, 1, 0.24313726, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7wy5"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="EnemyZoneHolder" type="Control" unique_id=653117568 node_paths=PackedStringArray("zone")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 3
 anchors_preset = 13
@@ -18,10 +29,9 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_k6j32")
 zone = NodePath("VBoxContainer/YManager/StackZone")
-manager_y = NodePath("VBoxContainer/YManager")
 metadata/_custom_type_script = "uid://cuagq8jxtnsat"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1753087071]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,11 +39,52 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="VBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer" unique_id=1185742640]
 custom_minimum_size = Vector2(0, 202.2)
 layout_mode = 2
 
-[node name="YManager" type="Control" parent="VBoxContainer" node_paths=PackedStringArray("zone")]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Panel" unique_id=112256825]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/Panel/VBoxContainer" unique_id=439200875]
+custom_minimum_size = Vector2(0, 63.23)
+layout_mode = 2
+size_flags_vertical = 2
+text = "Proccess damage"
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer/Panel/VBoxContainer" unique_id=849874096]
+z_index = 1
+custom_minimum_size = Vector2(0, 26.895)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.9490196, 1, 0.9490196, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_j7um1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sm05g")
+value = 69.97
+show_percentage = false
+
+[node name="DamageBar" type="ProgressBar" parent="VBoxContainer/Panel/VBoxContainer/HealthBar" unique_id=1658101789]
+z_index = -1
+custom_minimum_size = Vector2(0, 26.895)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.9490196, 1, 0.9490196, 1)
+theme_override_styles/fill = SubResource("StyleBoxFlat_m7wy5")
+value = 79.67
+show_percentage = false
+
+[node name="YManager" type="Control" parent="VBoxContainer" unique_id=1141991668 node_paths=PackedStringArray("zone")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -41,6 +92,7 @@ script = ExtResource("2_m7wy5")
 zone = NodePath("StackZone")
 metadata/_custom_type_script = "uid://d2tlkbwyglkn7"
 
-[node name="StackZone" parent="VBoxContainer/YManager" node_paths=PackedStringArray("ManagerX", "ManagerY") instance=ExtResource("2_sm05g")]
-ManagerX = NodePath("../../..")
-ManagerY = NodePath("..")
+[node name="StackZone" parent="VBoxContainer/YManager" unique_id=1104968020 instance=ExtResource("2_sm05g")]
+position = Vector2(0, 105)
+
+[connection signal="pressed" from="VBoxContainer/Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]
