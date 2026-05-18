@@ -17,24 +17,24 @@ var flipped_up : bool = false
 
 @export var base_damage : int = 0:
 	set(value):
-		calculate_total_damage()
-		total_damage = value
+		#calculate_total_damage()
+		base_damage = value
 var damage_buff_temp : int = 0:
 	set(value):
-		calculate_total_damage()
-		total_damage = value
+		#calculate_total_damage()
+		damage_buff_temp = value
 var damage_stack_buff : int = 0:
 	set(value):
-		calculate_total_damage()
-		total_damage = value
+		#calculate_total_damage()
+		damage_stack_buff = value
 var damage_multiplier_temp : int = 0:
 	set(value):
-		calculate_total_damage()
-		total_damage = value
+		#calculate_total_damage()
+		damage_multiplier_temp = value
 var damage_multiplier_stack_buff: int = 0:
 	set(value):
-		calculate_total_damage()
-		total_damage = value
+		#calculate_total_damage()
+		damage_multiplier_stack_buff = value
 
 var total_damage : int = 0
 
@@ -87,15 +87,15 @@ func drop_check():
 		var target_parent = hover_target.get_parent()
 		#var card_target : Card = hover_target.get_parent()
 		if hover_target is StackZone and !hover_target.has_cards():
-			change_parent(hover_target)
+			change_stack(hover_target)
 		if target_parent is Card:
 			var bottom_of_stack : Card = target_parent.get_bottom_card()
 			if is_legal_drop(bottom_of_stack):
-				change_parent(bottom_of_stack)
+				change_stack(bottom_of_stack)
 		if hover_target is StackZone and hover_target.get_bottom_card():
 			var bottom_of_stack : Card = hover_target.get_bottom_card()
 			if is_legal_drop(bottom_of_stack):
-				change_parent(bottom_of_stack)
+				change_stack(bottom_of_stack)
 	update_position()
 
 func hover_entered()->void:
@@ -175,6 +175,25 @@ func is_legal_drop(target_card : Card)->bool:
 	return false
 
 func change_parent(new_parent : Node)->void:
+	var old_parent = get_parent()
+	var old_stack_zone : StackManagerY = get_manager_y()
+	if old_parent is Card:
+		old_parent.flip_up(true)
+	
+	self.reparent(new_parent)
+	global_scale = new_parent.global_scale
+	current_card_stack = get_stack_zone()
+	#call new parent's methods
+	if new_parent is Card:
+		pass
+	if old_stack_zone:
+		old_stack_zone.card_exited()
+	if get_manager_y():
+		get_manager_y().card_entered()
+	update_position()
+	get_bottom_card().calculate_total_mana()
+
+func change_stack(new_parent : Node)->void:
 	if new_parent is Card or StackZone:
 		if new_parent.get_bottom_card() == get_bottom_card():
 			return
@@ -286,9 +305,8 @@ func remove()->void:
 	var next_card : Card = get_next_card()
 	var parent = get_parent()
 	print(parent)
-	if next_card:
-		if parent is Card or StackZone:
+	if parent is StackZone or Card:
+		if next_card:
 			#print(parent)
 			next_card.change_parent(parent)
-	#await get_tree().process_frame
-	#queue_free()
+	queue_free()

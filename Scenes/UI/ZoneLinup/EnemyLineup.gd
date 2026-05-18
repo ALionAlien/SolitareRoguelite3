@@ -50,6 +50,13 @@ func recalculate_seperation()->void:
 			new_x_pos += seperation * new_scale
 	assign_zone_numbers()
 
+func get_stacks()->Array[StackManagerX]:
+	var temp_stacks : Array[StackManagerX]
+	for child in get_children():
+		if child is StackManagerX:
+			temp_stacks.append(child)
+	return temp_stacks
+
 #assign a number to each x manager node based on it's position as a child
 func assign_zone_numbers()->void:
 	var children := get_children()

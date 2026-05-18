@@ -6,18 +6,6 @@ extends Node2D
 @export var mouse_manager : MouseManager
 @export var trigger_timer : Timer
 
-var enemy_has_cards : bool = false : 
-	set(value):
-		if value:
-			mouse_manager.can_drag = false
-			trigger_timer.start()
-		else:
-			mouse_manager.can_drag = true
-			trigger_timer.stop()
-		enemy_has_cards = value
-	get():
-		return enemy_has_cards
-
 
 func _ready()->void:
 	SaveManager.load_game()
@@ -65,14 +53,21 @@ func recaultulate_stacks()->void:
 
 
 func _on_trigger_tick_timeout()->void:
-	pass # Replace with function body.
+	process_cards()
 
 
-func process_triggers()->void:
-	pass
+func process_cards()->void:
+	for stack in enemy_zones.get_stacks():
+		if stack.has_card():
+			stack.process_attack()
+			return
+	trigger_timer.stop()
+	mouse_manager.can_drag = true
 
 #whenever a card is moved it emits a signal that calls this function
 #the signal connect method is in the stacksone class in the add_card function
 func _card_moved(_moved_card : Card)->void:
-	print("moved!")
 	recaultulate_stacks()
+	_on_trigger_tick_timeout()
+	mouse_manager.can_drag = false
+	trigger_timer.start()

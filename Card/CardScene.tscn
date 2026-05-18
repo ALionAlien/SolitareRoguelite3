@@ -85,6 +85,7 @@ shader_parameter/inset = 0.0
 script = ExtResource("1_833ip")
 visual = NodePath("ScaleController/CardVisual")
 scene_path = "res://Card/CardScene.tscn"
+base_damage = 1
 metadata/_custom_type_script = "uid://dtu16lqa6gjxi"
 
 [node name="Scale_manager" type="RemoteTransform2D" parent="." unique_id=1287877606]

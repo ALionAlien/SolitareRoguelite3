@@ -149,7 +149,7 @@ texture = ExtResource("2_kilg5")
 centered = false
 
 [node name="TriggerTick" type="Timer" parent="." unique_id=1429731185]
-wait_time = 0.077
+wait_time = 0.494
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddStack" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyZoneLineup" method="_on_add_stack_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer2/PanelContainer/HBoxContainer/AddCard" to="CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyZoneLineup" method="_on_add_card_pressed"]

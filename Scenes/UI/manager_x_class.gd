@@ -17,7 +17,7 @@ var zone_number : int = 0 :
 @export var zone : StackZone
 #@export var custom_scale : float = 1.0
 @export var default_card_gap : float = 35
-
+@export var health : ProgressBar
 var recalculated_card_gap : float
 
 #only edit y_pos if stackzone dimensions change.
@@ -58,8 +58,5 @@ func has_card()-> bool:
 
 func process_attack()->void:
 	if zone.has_cards():
+		health.value -= zone.get_next_card().base_damage
 		zone.get_next_card().remove()
-
-
-func _on_button_pressed():
-	process_attack()

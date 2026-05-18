@@ -81,7 +81,7 @@ shader_parameter/inset = 0.0
 [node name="Card1Scene" unique_id=554740951 instance=ExtResource("1_1ubdb")]
 script = ExtResource("2_nwxpn")
 scene_path = "res://Card/card1scene.tscn"
+base_damage = 2
 
 [node name="CardVisual" parent="ScaleController" parent_id_path=PackedInt32Array(1041122731) index="0" unique_id=64169096]
 material = SubResource("ShaderMaterial_nwxpn")
-pivot_offset = Vector2(150, 210)

@@ -8,7 +8,7 @@ func _ready():
 
 func update_data()->void:
 	var background : TextureRect = visual.background
-	visual.card_label.text = str(mana_cost, " - ", total_stack_mana)
+	visual.card_label.text = str(base_damage)
 	if drop_lock:
 		background.modulate =  Color(0.5, 0.5, 0.5, 1) #grayed out
 	#elif is_dragging:
