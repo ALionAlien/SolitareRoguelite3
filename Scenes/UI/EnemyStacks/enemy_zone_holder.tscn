@@ -16,7 +16,7 @@ shadow_color = Color(0, 0, 0, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7wy5"]
 bg_color = Color(1, 1, 1, 1)
 
-[node name="EnemyZoneHolder" type="Control" unique_id=653117568 node_paths=PackedStringArray("zone", "health")]
+[node name="EnemyZoneHolder" type="Control" unique_id=653117568 node_paths=PackedStringArray("action_label", "zone", "health")]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 3
 anchors_preset = 13
@@ -29,6 +29,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_k6j32")
+action_label = NodePath("VBoxContainer/Panel/VBoxContainer/Actions")
+action_count = null
 zone = NodePath("VBoxContainer/YManager/StackZone")
 health = NodePath("VBoxContainer/Panel/VBoxContainer/HealthBar")
 metadata/_custom_type_script = "uid://cuagq8jxtnsat"
@@ -53,6 +55,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 2
+
+[node name="Actions" type="Label" parent="VBoxContainer/Panel/VBoxContainer" unique_id=344912122]
+layout_mode = 2
+size_flags_vertical = 2
 
 [node name="HealthBar" type="ProgressBar" parent="VBoxContainer/Panel/VBoxContainer" unique_id=849874096]
 z_index = 1

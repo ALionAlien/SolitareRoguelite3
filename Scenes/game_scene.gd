@@ -65,10 +65,36 @@ func _on_trigger_tick_timeout()->void:
 func process_cards()->void:
 	trigger_timer.wait_time = TriggerTimer.trigger_duration
 	TriggerTimer.increase_speed()
-	#get_all_friendly_cards()
+	
+	#check/run flip triggers
+	#
+	
+	#flip que
+	var cards_to_flip : Array = get_tree().get_nodes_in_group("que_flip")
+	var filtered_cards_to_flip : Array[Card]
+	#filter only cards
+	for node in cards_to_flip:
+		if node is Card:
+			filtered_cards_to_flip.append(node)
+	
+	#sort by number left/right top/bottom
+	#if filtered_cards_to_flip.size() > 1:
+	
+	if !filtered_cards_to_flip.is_empty():
+		filtered_cards_to_flip[0].flip_up(true)
+		filtered_cards_to_flip[0].remove_from_group("que_flip")
+	
+	
+	#process cards in enemy zones
 	for stack in enemy_zones.get_stacks():
 		if stack.has_card():
 			stack.process_attack()
+			return
+	#process enemy attacks
+	for stack in enemy_zones.get_stacks():
+		if stack.action_remaining == 0:
+			#stack. attack here
+			stack.action_remaining = stack.action_count
 			return
 	trigger_timer.stop()
 	mouse_manager.can_drag = true
@@ -78,6 +104,8 @@ func process_cards()->void:
 func _card_moved(_moved_card : Card)->void:
 	recaultulate_stacks()
 	mouse_manager.can_drag = false
+	for stack in enemy_zones.get_stacks():
+		stack.action_remaining -= 1
 	_on_trigger_tick_timeout()
 	TriggerTimer.reset_duration()
 	trigger_timer.start()

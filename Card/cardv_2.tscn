@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://b32yhj5ksrvjp"]
+
+[node name="Cardv2" type="Button" unique_id=390023951]
+anchors_preset = -1
+anchor_right = 0.15900001
+anchor_bottom = 0.46400002
+offset_right = -0.4249878
+offset_bottom = -0.32000732
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 175)
+
+[node name="Boarder" type="MarginContainer" parent="." unique_id=1496420988]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VerticalDivider" type="VBoxContainer" parent="Boarder" unique_id=988980141]
+layout_mode = 2
+
+[node name="Heading" type="HBoxContainer" parent="Boarder/VerticalDivider" unique_id=1593912303]
+layout_mode = 2
+
+[node name="Damage" type="Label" parent="Boarder/VerticalDivider/Heading" unique_id=527036792]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Damage: 2"
+
+[node name="StatusEffects" type="HBoxContainer" parent="Boarder/VerticalDivider/Heading" unique_id=1123384177]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Cardname" type="Label" parent="Boarder/VerticalDivider" unique_id=1521210066]
+layout_mode = 2
+text = "Card name"
+
+[node name="TextureRect" type="TextureRect" parent="Boarder/VerticalDivider" unique_id=1856255129]
+layout_mode = 2

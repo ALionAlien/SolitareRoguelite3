@@ -4,7 +4,7 @@ extends Draggable
 signal quick_move(card : Card)
 signal update_last_moved_stack(stack : StackZone)
 signal moved(card: Card)
-signal flipped(card : Card)
+#signal flipped(card : Card)
 signal removed
 
 @export var scene_path : String
@@ -132,7 +132,7 @@ func flip_down(_animate : bool):
 func flip_up(_animate : bool):
 	if !flipped_up:
 		flipped_up = true
-		flipped.emit(self)
+		add_to_group("flip_trigger")
 		get_bottom_card().calculate_total_mana()
 
 func update_flip():
@@ -205,7 +205,8 @@ func change_stack(new_parent : Node)->void:
 	var old_parent = get_parent()
 	var old_stack_zone : StackManagerY = get_manager_y()
 	if old_parent is Card:
-		old_parent.flip_up(true)
+		old_parent.add_to_group("que_flip")
+		#old_parent.flip_up(true)
 	
 	self.reparent(new_parent)
 	global_scale = new_parent.global_scale
@@ -305,7 +306,7 @@ func trigger_animation()->void:
 	if trigger_scale_tween and trigger_scale_tween.is_valid():
 		trigger_scale_tween.kill() # Stops the old tween immediately
 	var pre_tween_scale : Vector2 = scale_controller.scale 
-	var tween_scale : Vector2 = Vector2(0.14,0.14)
+	var tween_scale : Vector2 = Vector2(0.07,0.07)
 	trigger_scale_tween = create_tween()
 	trigger_scale_tween.tween_property(scale_controller, "scale", pre_tween_scale + tween_scale, TriggerTimer.trigger_duration/5) 
 	trigger_scale_tween.tween_property(scale_controller, "scale", pre_tween_scale, TriggerTimer.trigger_duration/5) 

@@ -1,11 +1,11 @@
 extends Node
 
-@export var trigger_timer_min : float = 0.3
-@export var trigger_timer_additional : float = 0.3
+@export var trigger_timer_min : float = 0.15
+@export var trigger_timer_additional : float = 0.15
 #how much the 'trigger timer additional' gets divided by each process
 @export var trigger_timer_step : float = 0.93
 var trigger_timer_additional_temp : float
-var trigger_duration : float = 0.6 :
+var trigger_duration : float = 0.3 :
 	set(value):
 		trigger_duration = value
 	get():

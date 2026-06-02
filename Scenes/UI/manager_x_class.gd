@@ -7,6 +7,14 @@ var zone_number : int = 0 :
 		#$Panel/Label.text = str(value)
 		zone_number=value
 
+@export var action_label : Label
+@export var action_count : int = 5
+var action_remaining : int = 0:
+	set(value):
+		if action_label:
+			action_label.text = str(value)
+		action_remaining = value
+
 @export var default_width : float = 150:
 	set(value):
 		custom_minimum_size.x = value
@@ -28,6 +36,10 @@ var y_pos : int = 105 :
 		if zone:
 			zone.position.y = value
 		y_pos = value
+
+func _ready()->void:
+	action_remaining = action_count
+
 
 func set_zone_scale(zone_scale : float)->void:
 	self.custom_minimum_size.x = default_width * zone_scale
