@@ -19,7 +19,7 @@ var action_remaining : int = 0:
 	set(value):
 		custom_minimum_size.x = value
 		default_width = max(150,value)
-		if get_parent().has_method("recalculate_seperation"):
+		if get_parent() and get_parent().has_method("recalculate_seperation"):
 			get_parent().recalculate_seperation()
 
 @export var zone : StackZone
@@ -39,15 +39,16 @@ var y_pos : int = 105 :
 
 func _ready()->void:
 	action_remaining = action_count
+	if get_parent().has_method("recalculate_seperation"):
+			get_parent().recalculate_seperation()
 
 
 func set_zone_scale(zone_scale : float)->void:
 	self.custom_minimum_size.x = default_width * zone_scale
 	#pivot_offset.x=(default_card_gap/2)*zone_scale
 	zone.scale = Vector2(zone_scale,zone_scale)
-	
-	#if size.x != custom_minimum_size.x:
-	set_deferred("size", Vector2(custom_minimum_size.x,size.y))
+	await get_tree().process_frame
+	size.x = custom_minimum_size.x
 	zone.position.y = y_pos * zone_scale
 
 func get_rect2_from_collision(collision_shape_2d: CollisionShape2D) -> Rect2:

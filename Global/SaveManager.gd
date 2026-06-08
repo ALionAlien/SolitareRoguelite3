@@ -20,7 +20,9 @@ func save_game() -> void:
 func load_game() -> void:
 	if save_exists():
 		data = load_encrypted_resource(encrypted_path, get_encryption_password())
-		get_tree().call_group("save", "load_data")
+		#get_tree().call_group("save", "load_data")
+		if data.game_ui:
+			SceneSwitcher.switch_scene(data.game_ui)
 
 func save_exists() -> bool:
 	return FileAccess.file_exists(encrypted_path)

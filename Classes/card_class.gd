@@ -107,7 +107,7 @@ func hover_entered()->void:
 
 func drag_entered():
 	if can_drag_check() and flipped_up:
-		click_position = get_local_mouse_position() * get_parent().global_scale
+		click_position = get_local_mouse_position()
 		#print(get_parent().scale)
 		update_ignore_list()
 		set_children_z_index(100)
