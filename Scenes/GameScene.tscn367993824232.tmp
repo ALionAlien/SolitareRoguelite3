@@ -11,7 +11,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kilg5"]
 bg_color = Color(0.258824, 0.305882, 0.258824, 1)
 
-[node name="GameScene" type="Node2D" unique_id=899007837 node_paths=PackedStringArray("friendly_zones", "enemy_zones", "test_label", "mouse_manager", "trigger_timer") groups=["game"]]
+[node name="GameScene" type="Node2D" unique_id=899007837 node_paths=PackedStringArray("friendly_zones", "enemy_zones", "test_label", "mouse_manager", "trigger_timer") groups=["game", "save"]]
 script = ExtResource("1_eqhe0")
 friendly_zones = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel2/MarginContainer/FriendlyZoneLineup")
 enemy_zones = NodePath("CanvasLayer/VBoxContainer2/Panel/HSplitContainer/Panel/MarginContainer/EnemyZoneLineup")

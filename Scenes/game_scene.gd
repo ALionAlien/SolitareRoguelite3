@@ -13,11 +13,8 @@ extends Node2D
 var trigger_timer_additional_temp : float
 var trigger_duration_total : float
 
-
-func _ready()->void:
+func _ready():
 	SaveManager.load_game()
-
-
 
 func _on_save_pressed()->void:
 	SaveManager.save_game()
@@ -30,19 +27,6 @@ func _on_modify_data_pressed()->void:
 
 func _on_load_pressed()->void:
 	SaveManager.load_game()
-
-
-func save_data():
-	set_ownership(self, self)
-	var ui_scene = PackedScene.new()
-	ui_scene.pack(get_tree().get_current_scene())
-	SaveManager.data.game_ui = ui_scene
-
-func set_ownership(p_owner, node):    
-	for c in node.get_children():    
-		c.owner = p_owner
-		set_ownership(p_owner, c)
-
 
 func _on_call_cards_pressed()->void:
 	trigger_ability("enemy_dealt_damage")

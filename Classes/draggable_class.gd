@@ -17,15 +17,16 @@ var click_check_threashold : float = 1.16
 var click_position : Vector2 = Vector2.ZERO
 
 func _process(delta)->void:
-	#add delta to click check
-	if click_check >= 1.0 and click_check <= click_check_threashold:
-		click_check += delta
+	if is_node_ready():
+		#add delta to click check
+		if click_check >= 1.0 and click_check <= click_check_threashold:
+			click_check += delta
 	#update position if dragging
-	if is_dragging:
-		hover_check()
-		global_position = lerp(global_position,get_global_mouse_position() - (click_position * global_scale), 0.98)
-	else:
-		position = lerp(position, return_position, return_speed)
+		if is_dragging:
+			hover_check()
+			global_position = lerp(global_position,get_global_mouse_position() - (click_position * global_scale), 0.98)
+		else:
+			position = lerp(position, return_position, return_speed)
 
 func clicked()->void:
 	pass

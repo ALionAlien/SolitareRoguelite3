@@ -71,7 +71,6 @@ texture = ExtResource("5_3rj6t")
 expand_mode = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="SubViewport/CanvasLayer/CardBackground/BackgroundArt" unique_id=288859885]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

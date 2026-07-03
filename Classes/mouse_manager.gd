@@ -16,13 +16,15 @@ var is_dragging = false
 
 var current_target : Draggable = null :
 	set(target):
-		if target != current_target:
+		if current_target != null:
 			update_target(current_target, target)
-		current_target = target
+		if target is Draggable:
+			current_target = target
 
 func _process(_delta):
-	if !is_dragging:
-		update_raycast()
+	if is_node_ready():
+		if !is_dragging:
+			update_raycast()
 
 func _input(event):
 	if event is InputEventMouseButton and can_drag:
@@ -82,7 +84,7 @@ func update_raycast()->void:
 	else:
 		current_target = null
 	
-func update_target(old_target : Draggable = null, new_target : Draggable = null)->void:
+func update_target(old_target : Draggable = null, new_target = null)->void:
 	if old_target is Card:
 		old_target.hover_exited()
 	if new_target is Card and new_target.can_drag_check() and new_target.flipped_up:

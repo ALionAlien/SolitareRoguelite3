@@ -12,7 +12,7 @@ var friendly_zone_holder_scene : PackedScene = preload("res://Scenes/UI/Friendly
 
 var enemy_holders : Array[StackManagerX] = []
 
-var last_moved_to_stack : StackZone = null
+#var last_moved_to_stack : StackZone = null
 
 var children_count : int
 
@@ -43,51 +43,44 @@ func _notification(what):
 		assign_zone_numbers()
 
 
-#func set_ownership(p_owner, node):    
-	#for c in node.get_children():    
-		#c.owner = p_owner
-		#set_ownership(p_owner, c)
+func set_ownership(p_owner, node):    
+	for c in node.get_children():    
+		c.owner = p_owner
+		set_ownership(p_owner, c)
 
 func save_data()->void:
-	pass                
-	#var current_stacks : Array[PackedScene] = []
-	#for node in get_children():
-		#pass
-		#if node is StackManagerX:
-			#var current_stack_holder : StackManagerX = node
-			#set_ownership(current_stack_holder, current_stack_holder)
-			#var stack_scene = PackedScene.new()
-			#stack_scene.pack(current_stack_holder)
-			#current_stacks.append(stack_scene)
-			#
-			##var current_cards_in_stack : Array[Card] = current_stack_holder.zone.get_all_cards_in_stack()
-			##var stack_as_dict : Array[Dictionary]
-			##for card in current_cards_in_stack:
-				##if card.scene_path:
-					##var dict : Dictionary = {
-						##"path" = card.scene_path,
-						##"flipped_up" = card.flipped_up
-					##}
-					##stack_as_dict.append(dict)
-			##current_stacks.append(stack_as_dict)
-	#SaveManager.data.friendly_stacks = current_stacks
+	#pass
+	var current_stacks : Array[Array] = []
+	for node in get_children():
+		if node is StackManagerX:
+			var current_stack_holder : StackManagerX = node
+			var current_cards_in_stack : Array[Card] = current_stack_holder.zone.get_all_cards_in_stack()
+			var stack_as_dict : Array[Dictionary]
+			for card in current_cards_in_stack:
+				if card.scene_path:
+					var dict : Dictionary = {
+						"path" = card.scene_path,
+						"flipped_up" = card.flipped_up
+					}
+					stack_as_dict.append(dict)
+			current_stacks.append(stack_as_dict)
+	SaveManager.data.friendly_stacks = current_stacks
 
 func load_data()->void:
-	pass
 	#SceneSwitcher.switch_scene(SaveManager.data.game_screen)
-	#for child in get_children():
-		#child.queue_free()
-	#for i in SaveManager.data.friendly_stacks:
-		#var new_stack_holder := i.instantiate()
-		#new_stack_holder.set_anchors_preset(Control.PRESET_FULL_RECT, false) 
-		#new_stack_holder.call_deferred("set_anchors_preset", Control.PRESET_FULL_RECT, false)
-		#add_child(new_stack_holder)
-		#new_stack_holder.set_owner(get_tree().edited_scene_root)
-		#for n in SaveManager.data.stacks[i]:
-			##var card_scene_string : String = SaveManager.data.stacks[i][n]
-			#if n is Dictionary:
-				#var dict : Dictionary = n
-				#new_stack_holder.zone.add_card(dict["path"], dict["flipped_up"])
+	for child in get_children():
+		child.queue_free()
+	for i in SaveManager.data.friendly_stacks.size():
+		var new_stack_holder := friendly_zone_holder_scene.instantiate()
+		add_child(new_stack_holder)
+		new_stack_holder.set_owner(get_tree().edited_scene_root)
+		for n in SaveManager.data.friendly_stacks[i]:
+			#var card_scene_string : String = SaveManager.data.stacks[i][n]
+			if n is Dictionary:
+				var dict : Dictionary = n
+				new_stack_holder.zone.add_card(dict["path"], dict["flipped_up"])
+	await get_tree().process_frame
+	recalculate_seperation()
 
 
 func recalculate_seperation()->void:
